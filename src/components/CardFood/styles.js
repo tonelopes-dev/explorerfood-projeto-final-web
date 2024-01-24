@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.section`
   display: flex;
   flex-direction: column;
-  max-width: 304px;
-  max-height: 462px;
-  justify-content: center;
+  width: 304px;
+  height: 520px;
+
+  justify-content: space-between;
   align-items: center;
   padding: 14px;
   text-align: center;
@@ -23,12 +24,25 @@ export const Container = styled.div`
 export const PhotoFood = styled.div`
   display: flex;
   align-items: flex-start;
+  justify-content: flex-end;
+  margin-right: -36px;
+  margin-bottom: 15px;
+  gap: 16px;
   .photo-food {
     width: 176px;
+    flex: 1;
+  }
+  .icon-like {
+    flex: 2;
+    width: 24px;
+    height: 24px;
   }
 `;
 
 export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 256px;
   h1 {
     font-family: var(--poppins);
     font-size: 2.4rem;
@@ -40,9 +54,11 @@ export const AmountFood = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  width: 208px;
   gap: 16px;
   margin: 0 48px;
   width: 108px;
+  padding-bottom: 24px;
 
   .options {
     display: flex;
