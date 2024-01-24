@@ -16,7 +16,7 @@ export const Container = styled.button`
   font-size: 1.4rem;
   font-weight: 300;
   font-family: var(--poppins);
-  padding: 16px 47px;
+  padding: 16px 24px;
   white-space: nowrap;
   img {
     margin-right: 8px;

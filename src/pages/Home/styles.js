@@ -15,7 +15,7 @@ export const Banner = styled.section`
   height: 260px;
   align-items: center;
   margin-top: 164px;
-  margin-bottom: 48px;
+  margin-bottom: 62px;
   background: linear-gradient(
     180deg,
     rgba(240, 249, 255, 1) 0%,
@@ -23,6 +23,7 @@ export const Banner = styled.section`
     rgba(9, 30, 38, 1) 0%,
     rgba(0, 19, 28, 1) 100%
   );
+  padding-right: 100px;
   div > h1 {
     font-family: var(--poppins);
     font-size: 40px;
@@ -30,6 +31,7 @@ export const Banner = styled.section`
   }
   img {
     align-self: flex-end;
+    margin-left: -55px;
   }
 `;
 
@@ -38,8 +40,10 @@ export const Section = styled.section`
   flex-direction: column;
   height: 100%;
   align-items: stretch;
+  margin-bottom: 48px;
 `;
 export const TitleSection = styled.h1`
+  font-size: 3.2rem;
   z-index: 2;
 `;
 export const CardsFoods = styled.div`

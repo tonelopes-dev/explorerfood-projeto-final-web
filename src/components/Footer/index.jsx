@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <Container>
       <img
-        src="./src/assets/icons/logo-gray.png"
+        src="/assets/icons/logo-gray.png"
         alt=""
       />
       <span>© 2023 - Todos os direitos reservados.</span>

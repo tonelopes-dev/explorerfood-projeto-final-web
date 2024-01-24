@@ -13,7 +13,7 @@ export const SignOut = () => {
   return (
     <Logout onClick={handleSignOut}>
       <img
-        src="./src/assets/icons/SignOut.svg"
+        src="/assets/icons/SignOut.svg"
         alt="icone de deslogar da página."
       />
     </Logout>

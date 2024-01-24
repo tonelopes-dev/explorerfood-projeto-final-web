@@ -42,7 +42,7 @@ export const Home = () => {
       <Container>
         <Banner>
           <img
-            src="./src/assets/banner/banner-food.png"
+            src="/assets/banner/banner-food.png"
             alt=""
           />
           <div>
@@ -70,6 +70,7 @@ export const Home = () => {
                       description={meal.description}
                       price={meal.price}
                       imageUrl={meal.url_image}
+                      id={meal.id}
                     />
                   </SwiperSlide>
                 );
@@ -96,6 +97,7 @@ export const Home = () => {
                       description={dessert.description}
                       price={dessert.price}
                       imageUrl={dessert.url_image}
+                      id={dessert.id}
                     />
                   </SwiperSlide>
                 );
@@ -122,6 +124,7 @@ export const Home = () => {
                       description={drink.description}
                       price={drink.price}
                       imageUrl={drink.url_image}
+                      id={drink.id}
                     />
                   </SwiperSlide>
                 );

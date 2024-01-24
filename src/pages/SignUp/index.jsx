@@ -17,7 +17,7 @@ export function SignUp() {
     if (!name || !email || !password) {
       return alert("Por favor preencha todos os campos!");
     }
-    console.log(name, email, password);
+
     api
       .post("/users", { name, email, password })
       .then(() => {

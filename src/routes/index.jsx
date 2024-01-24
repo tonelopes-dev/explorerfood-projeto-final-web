@@ -1,9 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
 import { useAuth } from "../hooks/auth";
+import { USER_ROLE } from "../utils/roles";
 import { AdminRoutes } from "./admin.routes";
 import { CustomerRoutes } from "./customer.routes";
 import { AuthRoutes } from "./auth.routes";
-import { USER_ROLE } from "../utils/roles";
 
 export function Routes() {
   const { user } = useAuth();

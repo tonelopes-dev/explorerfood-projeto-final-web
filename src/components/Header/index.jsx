@@ -12,11 +12,11 @@ export const Header = () => {
         <Brand />
         <Input
           placeholder="Busque por pratos ou ingredientes"
-          icon="./src/assets/icons/search.svg"
+          icon="/assets/icons/search.svg"
         />
         <div className="buttor-header">
           <ButtonRed
-            icon="./src/assets/icons/Receipt.svg"
+            icon="/assets/icons/Receipt.svg"
             title="Pedidos (0)"
           />
         </div>

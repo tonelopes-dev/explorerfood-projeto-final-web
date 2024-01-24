@@ -12,7 +12,7 @@ export const AdminRoutes = () => {
         element={<Home />}
       />
       <Route
-        path="/foods"
+        path="/foods/:id"
         element={<Food />}
       />
       <Route

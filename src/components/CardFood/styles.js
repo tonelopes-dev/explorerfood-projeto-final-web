@@ -7,11 +7,11 @@ export const Container = styled.section`
   height: 520px;
 
   justify-content: space-between;
-  align-items: center;
+
   padding: 14px;
   text-align: center;
 
-  background-color: ${({ theme }) => theme.COLORS.DARK_200};
+  background-color: ${({ theme }) => theme.COLORS.DARK_600};
   border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
   .price-item {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
@@ -20,13 +20,21 @@ export const Container = styled.section`
     margin: 15px 0;
   }
 `;
+export const Content = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+`;
 
 export const PhotoFood = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
+  margin-top: 24px;
   margin-right: -36px;
   margin-bottom: 15px;
+
   gap: 16px;
   .photo-food {
     width: 176px;
@@ -54,10 +62,10 @@ export const AmountFood = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 208px;
+
   gap: 16px;
   margin: 0 48px;
-  width: 108px;
+
   padding-bottom: 24px;
 
   .options {
