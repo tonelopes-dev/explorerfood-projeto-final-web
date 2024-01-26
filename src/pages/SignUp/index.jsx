@@ -5,6 +5,7 @@ import { Input } from "../../components/Input";
 import { ButtonRed } from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+const logoCustumer = "/assets/icons/logo.png";
 
 export function SignUp() {
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ export function SignUp() {
   }
   return (
     <Container>
-      <Brand />
+      <Brand logo={logoCustumer} />
       <div>
         <Form>
           <h1>Crie sua conta</h1>

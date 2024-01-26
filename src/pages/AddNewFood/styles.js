@@ -32,6 +32,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   gap: 48px;
+  height: 70vh;
   img {
     width: 390px;
     height: 390px;

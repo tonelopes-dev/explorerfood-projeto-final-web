@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { NotFound } from "../pages/NotFound";
 import { Home } from "../pages/Home";
-import { Food } from "../pages/Food";
+import { FoodDetails } from "../pages/FoodDetails";
 
 export const CustomerRoutes = () => {
   return (
@@ -12,9 +12,10 @@ export const CustomerRoutes = () => {
         element={<Home />}
       />
       <Route
-        path="/foods/:id"
-        element={<Food />}
+        path="/foods-details/:id"
+        element={<FoodDetails />}
       />
+
       <Route
         path="*"
         exact={true}

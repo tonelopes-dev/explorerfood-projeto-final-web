@@ -22,6 +22,7 @@ export const ButtonRed = ({ quantity, showPrice, price, title, icon: Icon, ...re
       </Container>
     );
   }
+
   return (
     <Container
       type="button"

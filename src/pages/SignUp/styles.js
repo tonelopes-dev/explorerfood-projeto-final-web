@@ -35,6 +35,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 32px;
   padding: 64px 64px 32px 64px;
 
   width: 100%;
@@ -51,6 +52,5 @@ export const Form = styled.form`
   }
   input {
     width: 348px;
-    margin-bottom: 32px;
   }
 `;

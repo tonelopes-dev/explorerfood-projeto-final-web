@@ -2,15 +2,15 @@ import React from "react";
 import { Container } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-export const Brand = () => {
+export const Brand = ({ logo }) => {
   const navigate = useNavigate();
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
   return (
     <Container onClick={() => handleBack()}>
       <img
-        src="/assets/icons/logo.png"
+        src={logo}
         alt="logo food expolorer"
       />
     </Container>

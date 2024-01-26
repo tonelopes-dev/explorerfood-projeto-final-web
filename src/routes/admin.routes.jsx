@@ -2,7 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { NotFound } from "../pages/NotFound";
 import { Home } from "../pages/Home";
-import { Food } from "../pages/Food";
+import { EditFood } from "../pages/EditFood";
+import { AddNewFood } from "../pages/AddNewFood";
+import { FoodDetails } from "../pages/FoodDetails";
 
 export const AdminRoutes = () => {
   return (
@@ -12,8 +14,16 @@ export const AdminRoutes = () => {
         element={<Home />}
       />
       <Route
-        path="/foods/:id"
-        element={<Food />}
+        path="/foods-details/:id"
+        element={<FoodDetails />}
+      />
+      <Route
+        path="/edit-food/:id"
+        element={<EditFood />}
+      />
+      <Route
+        path="/add-new-food/"
+        element={<AddNewFood />}
       />
       <Route
         path="*"

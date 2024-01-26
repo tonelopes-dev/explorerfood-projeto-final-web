@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { api } from "../services/api";
-
 export const AuthContext = createContext({});
+import { api } from "../services/api";
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
@@ -11,9 +10,8 @@ function AuthProvider({ children }) {
     try {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
-      console.log(response.data);
 
-      localStorage.setItem("@foodexplorer:user", JSON.stringify(user));
+      localStorage.setItem("@foodexplorer:user", JSON.stringify(user), { withCredentials: true });
       localStorage.setItem("@foodexplorer:token", token);
 
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -72,9 +70,9 @@ function AuthProvider({ children }) {
   );
 }
 
-function useAuth() {
+function userAuth() {
   const content = useContext(AuthContext);
   return content;
 }
 
-export { AuthProvider, useAuth };
+export { AuthProvider, userAuth };

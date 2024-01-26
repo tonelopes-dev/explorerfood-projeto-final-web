@@ -17,11 +17,13 @@ import { Banner, Container, Section, TitleSection } from "./styles";
 import { CardFood } from "../../components/CardFood";
 import { api } from "../../services/api";
 import { Footer } from "../../components/Footer";
+import { userAuth } from "../../hooks/auth";
 
 export const Home = () => {
   const [meals, setMeals] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const { user } = userAuth();
 
   useEffect(() => {
     async function fetchFoods() {
@@ -38,7 +40,7 @@ export const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header user={user} />
       <Container>
         <Banner>
           <img
@@ -66,11 +68,12 @@ export const Home = () => {
                 return (
                   <SwiperSlide key={meal.id}>
                     <CardFood
+                      role={user.role}
+                      id={meal.id}
                       title={meal.title}
                       description={meal.description}
                       price={meal.price}
                       imageUrl={meal.url_image}
-                      id={meal.id}
                     />
                   </SwiperSlide>
                 );
@@ -93,11 +96,12 @@ export const Home = () => {
                 return (
                   <SwiperSlide key={dessert.id}>
                     <CardFood
+                      id={dessert.id}
+                      role={user.role}
                       title={dessert.title}
                       description={dessert.description}
                       price={dessert.price}
                       imageUrl={dessert.url_image}
-                      id={dessert.id}
                     />
                   </SwiperSlide>
                 );
@@ -120,11 +124,12 @@ export const Home = () => {
                 return (
                   <SwiperSlide key={drink.id}>
                     <CardFood
+                      id={drink.id}
+                      role={user.role}
                       title={drink.title}
                       description={drink.description}
                       price={drink.price}
                       imageUrl={drink.url_image}
-                      id={drink.id}
                     />
                   </SwiperSlide>
                 );

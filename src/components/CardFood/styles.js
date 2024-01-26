@@ -24,7 +24,6 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
 `;
 
 export const PhotoFood = styled.div`
@@ -34,9 +33,9 @@ export const PhotoFood = styled.div`
   margin-top: 24px;
   margin-right: -36px;
   margin-bottom: 15px;
-
   gap: 16px;
   .photo-food {
+    cursor: pointer;
     width: 176px;
     flex: 1;
   }
@@ -44,6 +43,10 @@ export const PhotoFood = styled.div`
     flex: 2;
     width: 24px;
     height: 24px;
+    cursor: pointer;
+  }
+  img:hover {
+    filter: brightness(0.9);
   }
 `;
 

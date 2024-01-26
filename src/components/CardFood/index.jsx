@@ -4,15 +4,18 @@ import { Container, Content, Description, PhotoFood } from "./styles";
 import formatCentsValue from "../../utils/formatCentsValue";
 import { useNavigate } from "react-router-dom";
 import { QuantityController } from "../QuantityControllerAddtoCart";
+import { USER_ROLE } from "../../utils/roles";
 
-export const CardFood = ({ title, price, description, imageUrl, id, ...rest }) => {
+export const CardFood = ({ role, title, price, description, imageUrl, id, ...rest }) => {
   const foodImageUrl = `http://localhost:3333/files/${imageUrl}`;
-  // Estado para gerenciar a quantidade
 
   const navigate = useNavigate();
 
+  function handleFoodDescription(id) {
+    navigate(`/foods-details/${id}`);
+  }
   function handleFoodDetails(id) {
-    navigate(`/foods/${id}`);
+    navigate(`/edit-food/${id}`);
   }
 
   if (!title) {
@@ -20,18 +23,29 @@ export const CardFood = ({ title, price, description, imageUrl, id, ...rest }) =
   }
   return (
     <Container {...rest}>
-      <Content onClick={() => handleFoodDetails(id)}>
+      <Content>
         <PhotoFood>
           <img
             className="photo-food"
             src={foodImageUrl}
             alt="foto do alimento"
+            onClick={() => handleFoodDescription(id)}
           />
-          <img
-            className="icon-like"
-            src="/assets/icons/Heart.svg"
-            alt={`foto do ${title}`}
-          />
+          {[USER_ROLE.ADMIN].includes(role) && (
+            <img
+              className="icon-like"
+              src="/assets/icons/Pencil.svg"
+              alt={`foto do ${title}`}
+              onClick={() => handleFoodDetails(id)}
+            />
+          )}
+          {[USER_ROLE.CUSTOMER].includes(role) && (
+            <img
+              className="icon-like"
+              src="/assets/icons/Heart.svg"
+              alt={`foto do ${title}`}
+            />
+          )}
         </PhotoFood>
         <Description>
           <h1>{title ? title : "Loading..."}</h1>
@@ -40,7 +54,7 @@ export const CardFood = ({ title, price, description, imageUrl, id, ...rest }) =
 
         <p className="price-item">{formatCentsValue(price)}</p>
       </Content>
-      <QuantityController />
+      {[USER_ROLE.CUSTOMER].includes(role) && <QuantityController />}
     </Container>
   );
 };

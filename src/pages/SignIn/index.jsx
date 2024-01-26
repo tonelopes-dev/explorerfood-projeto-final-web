@@ -4,13 +4,15 @@ import { Container, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonRed } from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/auth";
+import { userAuth } from "../../hooks/auth";
+
+const logoCustumer = "/assets/icons/logo.png";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signIn } = useAuth();
+  const { signIn } = userAuth();
 
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ export function SignIn() {
   }
   return (
     <Container>
-      <Brand />
+      <Brand logo={logoCustumer} />
       <div>
         <Form>
           <h1>Faça o login</h1>

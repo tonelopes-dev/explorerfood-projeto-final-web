@@ -4,8 +4,9 @@ export const Container = styled.footer`
   display: flex;
   justify-content: space-between;
   height: 77px;
-  width: 1120px;
+  max-width: 1120px;
   padding: 23px 0;
+
   img {
     width: 185px;
     height: 30px;

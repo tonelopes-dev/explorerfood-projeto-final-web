@@ -1,10 +1,10 @@
 import React from "react";
 import { Logout } from "./styles";
-import { useAuth } from "../../hooks/auth";
+import { userAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 export const SignOut = () => {
-  const { signOut } = useAuth();
+  const { signOut } = userAuth();
   const navigate = useNavigate();
   function handleSignOut() {
     navigate("/");
