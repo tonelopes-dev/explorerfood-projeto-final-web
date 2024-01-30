@@ -13,11 +13,14 @@ export function Routes() {
   const { user, signOut } = userAuth();
 
   /* useEffect(() => {
-    api.get("/users/validated").catch((error) => {
-      if (error.response?.status === 401) {
-        signOut();
-      }
-    });
+    async function fetchLogin() {
+      await api.get("/users/validated").catch((error) => {
+        if (error.response?.status === 401) {
+          signOut();
+        }
+      });
+    }
+    fetchLogin();
   }, []); */
 
   function AccessRoute() {

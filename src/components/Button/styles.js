@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.button`
   height: 48px;
-  width: auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;

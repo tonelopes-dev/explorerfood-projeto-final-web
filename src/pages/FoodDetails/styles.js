@@ -12,12 +12,12 @@ export const Container = styled.div`
 
 export const ButtonBack = styled.button`
   display: flex;
-
+  font-family: var(--poppins);
   align-items: center;
   gap: 10px;
   background-color: transparent;
   border: none;
-  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  color: ${({ theme }) => theme.COLORS.LIGHT_300};
   font-weight: bold;
   font-size: 2.4rem;
   text-align: left;

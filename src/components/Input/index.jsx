@@ -3,7 +3,7 @@ import { Container } from "./styles";
 export function Input({ isuser = false, border = false, icon: Icon, for: For, label: Label, type, ...rest }) {
   return (
     <Container $isuser={isuser}>
-      {Label && <label>{Label}:</label>}
+      {Label && <label>{Label}</label>}
       <div>
         {Icon && (
           <img

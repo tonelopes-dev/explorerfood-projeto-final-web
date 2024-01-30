@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.footer`
   display: flex;
+  max-width: 1120px;
   justify-content: space-between;
   height: 77px;
-  max-width: 1120px;
+  width: auto;
+
   padding: 23px 0;
 
   img {
