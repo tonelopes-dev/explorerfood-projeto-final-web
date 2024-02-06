@@ -30,28 +30,47 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@foodexplorer:token");
     setData({});
   }
-  async function updateProfile({ user, avatarFile }) {
+  async function addNewProduct({ food, imageFoodFile }) {
     try {
-      if (avatarFile) {
+      const responseId = await api.post(`/foods/`, food);
+
+      if (imageFoodFile) {
         const fileUploadForm = new FormData();
-        fileUploadForm.append("avatar", avatarFile);
+        fileUploadForm.append("photo-food", imageFoodFile);
 
-        const response = await api.patch("/users/avatar", fileUploadForm);
+        const response = await api.patch(`/foods/photo-food/${responseId.data.food_id}`, fileUploadForm);
 
-        user.avatar = response.data.avatar;
+        food.url_image = response.data.url_image;
       }
-
-      await api.put("/user", user);
-      localStorage.setItem("@foodexplorer:user", JSON.stringify(user));
-
-      setData({ user, token: data.token });
-
-      alert("Perfil atualizado com sucesso!");
+      alert("Produto adicionado com sucesso!");
+      return responseId.data.food_id;
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert("Não foi possível atualizar o perfil.");
+        alert("Não foi possível atualizar o produto.");
+      }
+    }
+  }
+  async function updateProduct({ food, imageFoodFile }) {
+    try {
+      if (imageFoodFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("photo-food", imageFoodFile);
+        console.log("fileUploadForm");
+        const response = await api.patch(`/foods/photo-food/${food.id}`, fileUploadForm);
+
+        food.url_image = response.data.url_image;
+      }
+
+      await api.put(`/foods/${food.id}`, food);
+
+      alert("Produto atualizado com sucesso!");
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar o produto.");
       }
     }
   }
@@ -66,7 +85,9 @@ function AuthProvider({ children }) {
     }
   }, []);
   return (
-    <AuthContext.Provider value={{ signIn, user: data.user, signOut, updateProfile }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 

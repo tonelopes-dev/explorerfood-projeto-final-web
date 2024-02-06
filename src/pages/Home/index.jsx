@@ -23,6 +23,8 @@ export const Home = () => {
   const [meals, setMeals] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState([]);
+
   const { user } = userAuth();
 
   useEffect(() => {
@@ -33,14 +35,31 @@ export const Home = () => {
       setDesserts(dessert.data);
       const drink = await api.get("/foods/?categoryFood=drink");
       setDrinks(drink.data);
+      console.log(meal.data, dessert.data, drink.data);
     }
 
     fetchFoods();
   }, []);
 
+  useEffect(() => {
+    async function fetchFoodsOrIngredients() {
+      const response = await api.get(
+        `/foods/?foodName=${searchTerm}&ingredients=${searchTerm}&categoryFood=${searchTerm}`
+      );
+
+      setMeals(response.data);
+      setDesserts(response.data);
+      setDrinks(response.data);
+    }
+    fetchFoodsOrIngredients();
+  }, [searchTerm]);
+
   return (
     <>
-      <Header user={user} />
+      <Header
+        user={user}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       <Container>
         <Banner>
           <img

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ButtonBack,
+  Buttons,
   Container,
   Content,
   FileImageFood,
@@ -8,6 +9,7 @@ import {
   InputDescription,
   InputIngredients,
   InputNameFood,
+  InputPrice,
 } from "./styles";
 import { Header } from "../../components/Header";
 import { IngredientItem } from "../../components/IngredientItem";
@@ -16,23 +18,31 @@ import { api } from "../../services/api";
 
 import { Footer } from "../../components/Footer";
 import { userAuth } from "../../hooks/auth";
+import { ButtonRed } from "../../components/Button";
 
 export const EditFood = () => {
   const [data, setData] = useState(null);
+  const [imageFood, setImageFood] = useState(null);
   const [titleFood, setTitleFood] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(null);
 
   const [ingredientsName, setIngredientsName] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
   const params = useParams();
   const navigate = useNavigate();
-  const { user } = userAuth();
+  const { user, updateProduct } = userAuth();
+
+  function handleChangeImageFood(event) {
+    const file = event.target.files[0];
+    
+    setImageFood(file);
+  }
 
   function handleAddIngredient() {
     setIngredientsName((prevState) => [...prevState, newIngredient]);
     setNewIngredient("");
-    console.log(ingredientsName);
   }
   function handleRemoveIngredient(deleted) {
     setIngredientsName((prevState) => prevState.filter((ingredient) => ingredient !== deleted));
@@ -41,6 +51,27 @@ export const EditFood = () => {
     const ingredientNames = data.map((ingredient) => ingredient.name);
     setIngredientsName(ingredientNames);
   }
+  function formatPrice(priceInCents) {
+    const price = (priceInCents / 100).toFixed(2);
+    const formattedPrice = price.replace(".", ",");
+
+    return formattedPrice;
+  }
+
+  function convertStringToNumber(inputString) {
+    if (typeof inputString === "string") {
+      // Remove espaços e substitui vírgulas por pontos
+      let cleanedString = inputString.replace(/\s/g, "").replace(/,/g, ".");
+
+      // Converte para número
+      let number = parseFloat(cleanedString);
+
+      // Multiplica por 100 para converter para centavos e arredonda para evitar problemas de precisão
+      return isNaN(number) ? 0 : Math.round(number * 100);
+    }
+    return 0;
+  }
+
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
   };
@@ -48,12 +79,34 @@ export const EditFood = () => {
   function handleBack() {
     navigate(-1);
   }
+  async function handleUpdateProduct() {
+    const priceInCents = convertStringToNumber(price);
+    const updated = {
+      title: titleFood,
+      category: selectedCategory,
+      description,
+      ingredients: ingredientsName,
+      price: priceInCents,
+      user_id: user.id,
+    };
+    const productUpdated = Object.assign(data, updated);
+
+    await updateProduct({ food: productUpdated, imageFoodFile: imageFood });
+    navigate(`/foods-details/${params.id}`);
+  }
+  async function handleDeleteProduct() {
+    await api.delete(`/foods/${params.id}`);
+    alert("Produto deletado!");
+    navigate("/add-new-food/");
+  }
 
   useEffect(() => {
     async function fetchFood() {
       const response = await api.get(`/foods/${params.id}`);
       setData(response.data);
+      setTitleFood(response.data.title);
       setIngredientsList(response.data.ingredients);
+      setPrice(formatPrice(response.data.price));
       setSelectedCategory(response.data.category);
       setDescription(response.data.description);
     }
@@ -94,6 +147,7 @@ export const EditFood = () => {
               <input
                 type="file"
                 id="file-upload"
+                onChange={handleChangeImageFood}
               />
               Selecione imagem
             </label>
@@ -132,37 +186,68 @@ export const EditFood = () => {
             </select>
           </InputCategory>
 
-          <label htmlFor="ingredients">Ingredientes</label>
           <InputIngredients>
-            {ingredientsName.map((ingredient, index) => (
-              <IngredientItem
-                key={String(index)}
-                value={ingredient}
-                onClick={() => {
-                  handleRemoveIngredient(ingredient);
-                }}
-              />
-            ))}
+            <label htmlFor="ingredients">Ingredientes</label>
+            <div className="container-ingredients ">
+              {ingredientsName.map((ingredient, index) => (
+                <IngredientItem
+                  key={String(index)}
+                  value={ingredient}
+                  onClick={() => {
+                    handleRemoveIngredient(ingredient);
+                  }}
+                />
+              ))}
 
-            <IngredientItem
-              className="input-ingredient"
-              placeholder="Adicionar"
-              isNew
-              value={newIngredient}
-              onChange={(e) => setNewIngredient(e.target.value)}
-              onClick={handleAddIngredient}
-            />
+              <IngredientItem
+                className="input-ingredient"
+                placeholder="Adicionar"
+                isNew
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                onClick={handleAddIngredient}
+              />
+            </div>
           </InputIngredients>
+          <InputPrice>
+            <label htmlFor="price">Preço</label>
+            <div>
+              <p>R$ </p>
+              <input
+                type="text"
+                value={price}
+                placeholder="79,00"
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+          </InputPrice>
+
           <InputDescription>
             <label htmlFor="description">Descrição</label>
             <textarea
               value={description}
+              onChange={(e) => setDescription(e.target.value)}
               name=""
               id=""
               cols="100"
               rows="100"
             ></textarea>
           </InputDescription>
+          <Buttons>
+            <div className="content">
+              {" "}
+              <ButtonRed
+                className="button-delete"
+                title="Excluir prato"
+                onClick={handleDeleteProduct}
+              />
+              <ButtonRed
+                className="button-updated"
+                title="Salvar alterações"
+                onClick={handleUpdateProduct}
+              />
+            </div>
+          </Buttons>
         </Content>
         <Footer />
       </Container>

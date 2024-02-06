@@ -4,11 +4,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.COLORS.LIGHT_500};
-
+  height: 32px;
   border: ${({ theme, $isnew }) => ($isnew ? `1px dashed ${theme.COLORS.LIGHT_500}` : "none")};
   background-color: ${({ theme, $isnew }) => ($isnew ? "transparent" : theme.COLORS.LIGHT_600)};
 
-  margin-bottom: 8px;
   border-radius: 10px;
   padding-right: 16px;
 
@@ -35,7 +34,7 @@ export const Container = styled.div`
     padding: 12px;
     margin-right: 10px;
     padding-right: 0px;
-    width: ${({ inputWidth }) => inputWidth}; // Usa a propriedade inputWidth
+    width: ${({ $inputwidth }) => $inputwidth}; // Usa a propriedade inputWidth
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     background: transparent;
     border: none;

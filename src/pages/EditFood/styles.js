@@ -33,7 +33,7 @@ export const ButtonBack = styled.button`
     height: 24px;
   }
 `;
-export const Content = styled.div`
+export const Content = styled.form`
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
@@ -52,59 +52,6 @@ export const Content = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  display: flex;
-  gap: 32px;
-  width: 100%;
-  flex-wrap: wrap;
-  img {
-    margin-right: 16px;
-  }
-  .container-file {
-    width: 100%;
-    white-space: nowrap;
-  }
-  #file-upload {
-    display: none;
-    width: 100%;
-  }
-  .label-image {
-    margin-bottom: 16px;
-  }
-  .custom-file-upload {
-    display: flex;
-    width: 100%;
-    padding: 12px 32px;
-    align-items: center;
-    cursor: pointer;
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    font-family: var(--poppins);
-    font-weight: 100;
-  }
-  #custom-name {
-    width: 463px;
-  }
-  .custom-categories {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    label {
-      margin-bottom: 16px;
-    }
-    select {
-      width: 100%;
-      color: ${({ theme }) => theme.COLORS.LIGHT_500};
-      background-color: ${({ theme }) => theme.COLORS.DARK_900};
-      padding: 16px 14px;
-      border-radius: 8px;
-      border: none;
-    }
-  }
-`;
 export const FileImageFood = styled.div`
   display: flex;
 
@@ -155,7 +102,7 @@ export const InputNameFood = styled.div`
   input {
     width: 100%;
     height: 80px;
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     padding: 16px 14px;
     border-radius: 8px;
@@ -172,7 +119,6 @@ export const InputCategory = styled.div`
   max-width: 364px;
   width: 100%;
   label {
-    padding-right: 10px;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
     font-size: 1.4rem;
     margin-bottom: 16px;
@@ -198,17 +144,60 @@ export const InputIngredients = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  width: 100%;
-  flex-direction: row;
+  width: 75%;
+  flex-direction: column;
   justify-content: start;
   align-items: flex-start;
   border-radius: 8px;
-  gap: 16px;
-  padding: 12px 16px;
-  color: ${({ theme }) => theme.COLORS.LIGHT_500};
-  background-color: ${({ theme }) => theme.COLORS.DARK_800};
+  label {
+    margin-bottom: 12px;
+  }
+  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+  .container-ingredients {
+    border-radius: 8px;
+    gap: 16px;
+    padding: 8px 16px;
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+  }
   .input-ingredient {
     width: 75px;
+  }
+`;
+
+export const InputPrice = styled.div`
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 251px;
+  label {
+    margin-bottom: 12px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    padding: 0 14px;
+    border-radius: 8px;
+    gap: 5px;
+    font-size: 1.6rem;
+  }
+  div p {
+    color: ${({ theme }) => theme.COLORS.LIGHT_600};
+  }
+  input {
+    font-size: 1.6rem;
+    height: 48px;
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    padding: 0px;
+    border-radius: 8px;
+    border: none;
   }
 `;
 export const InputDescription = styled.div`
@@ -233,5 +222,27 @@ export const InputDescription = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 100%; /* 16px */
+  }
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: end;
+    width: 340px;
+    height: 48px;
+  }
+  .button-updated {
+    
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_400} !important;
+  }
+  .button-delete {
+    
+    background-color: ${({ theme }) => theme.COLORS.DARK_800} !important;
   }
 `;

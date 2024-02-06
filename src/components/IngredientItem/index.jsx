@@ -26,7 +26,7 @@ export function IngredientItem({ isNew = false, value, onClick, ...rest }) {
   return (
     <Container
       $isnew={isNew}
-      inputWidth={inputWidth}
+      $inputwidth={inputWidth}
     >
       <input
         type="text"

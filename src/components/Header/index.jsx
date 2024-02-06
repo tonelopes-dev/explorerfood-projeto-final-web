@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const logoCustumer = "/assets/icons/logo.png";
 const logoAdmin = "/assets/icons/logo-admin.png";
 
-export const Header = ({ user }) => {
+export const Header = ({ user, ...rest }) => {
   const navigate = useNavigate();
   function handleAddProduct() {
     navigate("/add-new-food/");
@@ -22,6 +22,7 @@ export const Header = ({ user }) => {
           <Brand logo={logoAdmin} />
 
           <Input
+            {...rest}
             placeholder="Busque por pratos ou ingredientes"
             icon="/assets/icons/search.svg"
           />
@@ -45,6 +46,7 @@ export const Header = ({ user }) => {
             placeholder="Busque por pratos ou ingredientes"
             icon="/assets/icons/search.svg"
           />
+          {children}
           <div className="buttor-header">
             <ButtonRed
               icon="/assets/icons/Receipt.svg"
