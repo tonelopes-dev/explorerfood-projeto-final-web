@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./styles";
+import { Container, HeaderTop, Menu } from "./styles";
 import { Brand } from "../Brand";
 import { Input } from "../Input";
 import { ButtonRed } from "../Button";
@@ -18,7 +18,16 @@ export const Header = ({ user, ...rest }) => {
   return (
     <Container>
       {[USER_ROLE.ADMIN].includes(user.role) && (
-        <header>
+        <HeaderTop>
+          <Menu
+            {...rest}
+            className="menu-mobile"
+          >
+            <img
+              src="/assets/icons/Menu.svg"
+              alt="icone de deslogar da página."
+            />
+          </Menu>
           <Brand logo={logoAdmin} />
 
           <Input
@@ -36,11 +45,11 @@ export const Header = ({ user, ...rest }) => {
           </div>
 
           <SignOut />
-        </header>
+        </HeaderTop>
       )}
 
       {[USER_ROLE.CUSTOMER].includes(user.role) && (
-        <header>
+        <HeaderTop>
           <Brand logo={logoCustumer} />
           <Input
             placeholder="Busque por pratos ou ingredientes"
@@ -55,7 +64,7 @@ export const Header = ({ user, ...rest }) => {
           </div>
 
           <SignOut />
-        </header>
+        </HeaderTop>
       )}
       {/*  <header>
         <Brand logo={logoCustumer} />

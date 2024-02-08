@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import { DEVICE_BREAKPOINTS } from "./deviceBreakpoints";
 export default createGlobalStyle`
   *{
     margin: 0;
@@ -13,6 +13,10 @@ export default createGlobalStyle`
     --poppins: 'Poppins', sans-serif;
 
     font-size: 62.5%;
+
+    @media (max-width:${DEVICE_BREAKPOINTS.MD}) {
+     body{background-color: red;} 
+    }
   }
 
   body {

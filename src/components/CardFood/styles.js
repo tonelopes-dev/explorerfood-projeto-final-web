@@ -10,7 +10,7 @@ export const Container = styled.section`
 
   padding: 14px;
   text-align: center;
-
+  border-radius: 8px;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
   border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
   .price-item {

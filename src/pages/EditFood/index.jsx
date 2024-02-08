@@ -36,7 +36,7 @@ export const EditFood = () => {
 
   function handleChangeImageFood(event) {
     const file = event.target.files[0];
-    
+
     setImageFood(file);
   }
 
@@ -119,9 +119,9 @@ export const EditFood = () => {
   }
 
   return (
-    <>
+    <Container>
       <Header user={user} />
-      <Container>
+      <Content>
         <ButtonBack onClick={() => handleBack()}>
           <img
             src="/assets/icons/CaretLeft.svg"
@@ -130,127 +130,125 @@ export const EditFood = () => {
           voltar
         </ButtonBack>
 
-        <Content>
-          <h1>Editar prato</h1>
+        <h1>Editar prato</h1>
 
-          <FileImageFood>
-            <p className="label-title">Imagem do produto</p>
-            <label
-              htmlFor="file-upload"
-              className="custom-file-upload"
-            >
-              <img
-                src="/assets/icons/UploadSimple.svg"
-                alt=""
-                className="custom-label-image"
-              />
-              <input
-                type="file"
-                id="file-upload"
-                onChange={handleChangeImageFood}
-              />
-              Selecione imagem
-            </label>
-            <span id="file-name"></span>
-          </FileImageFood>
-
-          <InputNameFood>
-            <label htmlFor="name">Nome</label>
-            <input
-              id="name"
-              type="text"
-              value={titleFood}
-              onChange={(e) => setTitleFood(e.target.value)}
-              placeholder="Nome do prato"
+        <FileImageFood>
+          <p className="label-title">Imagem do produto</p>
+          <label
+            htmlFor="file-upload"
+            className="custom-file-upload"
+          >
+            <img
+              src="/assets/icons/UploadSimple.svg"
+              alt=""
+              className="custom-label-image"
             />
-          </InputNameFood>
+            <input
+              type="file"
+              id="file-upload"
+              onChange={handleChangeImageFood}
+            />
+            Selecione imagem
+          </label>
+          <span id="file-name"></span>
+        </FileImageFood>
 
-          <InputCategory>
-            <label
-              className="select"
-              htmlFor="category"
-            >
-              Categoria
-            </label>
+        <InputNameFood>
+          <label htmlFor="name">Nome</label>
+          <input
+            id="name"
+            type="text"
+            value={titleFood}
+            onChange={(e) => setTitleFood(e.target.value)}
+            placeholder="Nome do prato"
+          />
+        </InputNameFood>
 
-            <select
-              name="categories"
-              id="category"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-            >
-              <option value="">--Categorias--</option>
-              <option value="meal">Refeição</option>
-              <option value="dessert">Sobremesas</option>
-              <option value="drink">Bebidas</option>
-            </select>
-          </InputCategory>
+        <InputCategory>
+          <label
+            className="select"
+            htmlFor="category"
+          >
+            Categoria
+          </label>
 
-          <InputIngredients>
-            <label htmlFor="ingredients">Ingredientes</label>
-            <div className="container-ingredients ">
-              {ingredientsName.map((ingredient, index) => (
-                <IngredientItem
-                  key={String(index)}
-                  value={ingredient}
-                  onClick={() => {
-                    handleRemoveIngredient(ingredient);
-                  }}
-                />
-              ))}
+          <select
+            name="categories"
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+          >
+            <option value="">--Categorias--</option>
+            <option value="meal">Refeição</option>
+            <option value="dessert">Sobremesas</option>
+            <option value="drink">Bebidas</option>
+          </select>
+        </InputCategory>
 
+        <InputIngredients>
+          <label htmlFor="ingredients">Ingredientes</label>
+          <div className="container-ingredients ">
+            {ingredientsName.map((ingredient, index) => (
               <IngredientItem
-                className="input-ingredient"
-                placeholder="Adicionar"
-                isNew
-                value={newIngredient}
-                onChange={(e) => setNewIngredient(e.target.value)}
-                onClick={handleAddIngredient}
+                key={String(index)}
+                value={ingredient}
+                onClick={() => {
+                  handleRemoveIngredient(ingredient);
+                }}
               />
-            </div>
-          </InputIngredients>
-          <InputPrice>
-            <label htmlFor="price">Preço</label>
-            <div>
-              <p>R$ </p>
-              <input
-                type="text"
-                value={price}
-                placeholder="79,00"
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-          </InputPrice>
+            ))}
 
-          <InputDescription>
-            <label htmlFor="description">Descrição</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              name=""
-              id=""
-              cols="100"
-              rows="100"
-            ></textarea>
-          </InputDescription>
-          <Buttons>
-            <div className="content">
-              {" "}
-              <ButtonRed
-                className="button-delete"
-                title="Excluir prato"
-                onClick={handleDeleteProduct}
-              />
-              <ButtonRed
-                className="button-updated"
-                title="Salvar alterações"
-                onClick={handleUpdateProduct}
-              />
-            </div>
-          </Buttons>
-        </Content>
-        <Footer />
-      </Container>
-    </>
+            <IngredientItem
+              className="input-ingredient"
+              placeholder="Adicionar"
+              isNew
+              value={newIngredient}
+              onChange={(e) => setNewIngredient(e.target.value)}
+              onClick={handleAddIngredient}
+            />
+          </div>
+        </InputIngredients>
+        <InputPrice>
+          <label htmlFor="price">Preço</label>
+          <div>
+            <p>R$ </p>
+            <input
+              type="text"
+              value={price}
+              placeholder="79,00"
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+        </InputPrice>
+
+        <InputDescription>
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            name=""
+            id=""
+            cols="100"
+            rows="100"
+          ></textarea>
+        </InputDescription>
+        <Buttons>
+          <div className="content">
+            {" "}
+            <ButtonRed
+              className="button-delete"
+              title="Excluir prato"
+              onClick={handleDeleteProduct}
+            />
+            <ButtonRed
+              className="button-updated"
+              title="Salvar alterações"
+              onClick={handleUpdateProduct}
+            />
+          </div>
+        </Buttons>
+      </Content>
+      <Footer />
+    </Container>
   );
 };

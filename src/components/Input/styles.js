@@ -12,9 +12,9 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.DARK_900};
-    padding-left: 14px;
+    padding-left: 12px;
     border-radius: 8px;
-    margin: 0 auto;
+    margin: auto;
   }
   img {
     width: 20px;

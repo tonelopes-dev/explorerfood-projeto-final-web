@@ -1,14 +1,16 @@
 import React from "react";
-import { Container } from "./styles";
+import { Container, Content } from "./styles";
 
 export const Footer = () => {
   return (
     <Container>
-      <img
-        src="/assets/icons/logo-gray.png"
-        alt=""
-      />
-      <span>© 2023 - Todos os direitos reservados.</span>
+      <Content>
+        <img
+          src="/assets/icons/logo-gray.png"
+          alt=""
+        />
+        <span>© 2023 - Todos os direitos reservados.</span>
+      </Content>
     </Container>
   );
 };

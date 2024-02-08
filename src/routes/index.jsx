@@ -12,7 +12,7 @@ import { AuthRoutes } from "./auth.routes";
 export function Routes() {
   const { user, signOut } = userAuth();
 
-  /* useEffect(() => {
+  useEffect(() => {
     async function fetchLogin() {
       await api.get("/users/validated").catch((error) => {
         if (error.response?.status === 401) {
@@ -21,7 +21,7 @@ export function Routes() {
       });
     }
     fetchLogin();
-  }, []); */
+  }, []);
 
   function AccessRoute() {
     switch (user.role) {

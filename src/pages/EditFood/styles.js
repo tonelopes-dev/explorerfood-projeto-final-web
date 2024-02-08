@@ -38,6 +38,7 @@ export const Content = styled.form`
   flex-wrap: wrap;
   gap: 18px;
   width: 100%;
+  padding: 24px;
   flex-direction: row;
   justify-content: space-between;
 
@@ -238,11 +239,9 @@ export const Buttons = styled.div`
     height: 48px;
   }
   .button-updated {
-    
     background-color: ${({ theme }) => theme.COLORS.TOMATO_400} !important;
   }
   .button-delete {
-    
     background-color: ${({ theme }) => theme.COLORS.DARK_800} !important;
   }
 `;

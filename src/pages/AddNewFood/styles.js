@@ -7,7 +7,6 @@ export const Container = styled.div`
 
   margin: auto;
 
-  background-color: ${({ theme }) => theme.COLORS.DARK_400};
   h1 {
     font-family: var(--poppins);
     font-weight: 400;

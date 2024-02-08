@@ -12,7 +12,17 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 import { Header } from "../../components/Header";
-import { Banner, Container, Section, TitleSection } from "./styles";
+import {
+  Banner,
+  Container,
+  Content,
+  ContentGradient,
+  ImageBanner,
+  Section,
+  SectionContent,
+  TitleBanner,
+  TitleSection,
+} from "./styles";
 
 import { CardFood } from "../../components/CardFood";
 import { api } from "../../services/api";
@@ -23,7 +33,8 @@ export const Home = () => {
   const [meals, setMeals] = useState([]);
   const [desserts, setDesserts] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState([]);
+  /*  const [searchTerm, setSearchTerm] = useState([]);
+  const [resultSerchTerm, setResultSerchTerm] = useState([]); */
 
   const { user } = userAuth();
 
@@ -41,18 +52,15 @@ export const Home = () => {
     fetchFoods();
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     async function fetchFoodsOrIngredients() {
       const response = await api.get(
         `/foods/?foodName=${searchTerm}&ingredients=${searchTerm}&categoryFood=${searchTerm}`
       );
-
-      setMeals(response.data);
-      setDesserts(response.data);
-      setDrinks(response.data);
+      setResultSerchTerm(response.data);
     }
     fetchFoodsOrIngredients();
-  }, [searchTerm]);
+  }, [searchTerm]); */
 
   return (
     <>
@@ -62,102 +70,112 @@ export const Home = () => {
       />
       <Container>
         <Banner>
-          <img
-            src="/assets/banner/banner-food.png"
-            alt=""
-          />
-          <div>
+          <ImageBanner>
+            <img
+              src="/assets/banner/banner-food.png"
+              alt=""
+            />
+          </ImageBanner>
+
+          <TitleBanner>
             <h1>Sabores inigualáveis</h1>
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
-          </div>
+          </TitleBanner>
         </Banner>
-
-        {meals.length > 0 && (
-          <Section>
-            <TitleSection>Refeições</TitleSection>
-
-            <Swiper
-              slidesPerView={3}
-              spaceBetween={27}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {meals.map((meal) => {
-                return (
-                  <SwiperSlide key={meal.id}>
-                    <CardFood
-                      role={user.role}
-                      id={meal.id}
-                      title={meal.title}
-                      description={meal.description}
-                      price={meal.price}
-                      imageUrl={meal.url_image}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </Section>
-        )}
-        {desserts.length > 0 && (
-          <Section>
-            <TitleSection>Sobremesas</TitleSection>
-
-            <Swiper
-              slidesPerView={3}
-              spaceBetween={27}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {desserts.map((dessert) => {
-                return (
-                  <SwiperSlide key={dessert.id}>
-                    <CardFood
-                      id={dessert.id}
-                      role={user.role}
-                      title={dessert.title}
-                      description={dessert.description}
-                      price={dessert.price}
-                      imageUrl={dessert.url_image}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </Section>
-        )}
-        {drinks.length > 0 && (
-          <Section>
-            <TitleSection>Bebidas</TitleSection>
-
-            <Swiper
-              slidesPerView={3}
-              spaceBetween={27}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-            >
-              {drinks.map((drink) => {
-                return (
-                  <SwiperSlide key={drink.id}>
-                    <CardFood
-                      id={drink.id}
-                      role={user.role}
-                      title={drink.title}
-                      description={drink.description}
-                      price={drink.price}
-                      imageUrl={drink.url_image}
-                    />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </Section>
-        )}
-        <Footer />
+        <Content>
+          {meals.length > 0 && (
+            <Section>
+              <TitleSection>Refeições</TitleSection>
+              <SectionContent>
+                <Swiper
+                  slidesPerView={3}
+                  spaceBetween={27}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  <ContentGradient />
+                  {meals.map((meal) => {
+                    return (
+                      <SwiperSlide key={meal.id}>
+                        <CardFood
+                          role={user.role}
+                          id={meal.id}
+                          title={meal.title}
+                          description={meal.description}
+                          price={meal.price}
+                          imageUrl={meal.url_image}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </SectionContent>
+            </Section>
+          )}
+          {desserts.length > 0 && (
+            <Section>
+              <TitleSection>Sobremesas</TitleSection>
+              <SectionContent>
+                <Swiper
+                  slidesPerView={3}
+                  spaceBetween={27}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  <ContentGradient />
+                  {desserts.map((dessert) => {
+                    return (
+                      <SwiperSlide key={dessert.id}>
+                        <CardFood
+                          id={dessert.id}
+                          role={user.role}
+                          title={dessert.title}
+                          description={dessert.description}
+                          price={dessert.price}
+                          imageUrl={dessert.url_image}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </SectionContent>
+            </Section>
+          )}
+          {drinks.length > 0 && (
+            <Section>
+              <TitleSection>Bebidas</TitleSection>
+              <SectionContent>
+                <Swiper
+                  slidesPerView={3}
+                  spaceBetween={27}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  <ContentGradient />
+                  {drinks.map((drink) => {
+                    return (
+                      <SwiperSlide key={drink.id}>
+                        <CardFood
+                          id={drink.id}
+                          role={user.role}
+                          title={drink.title}
+                          description={drink.description}
+                          price={drink.price}
+                          imageUrl={drink.url_image}
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </SectionContent>
+            </Section>
+          )}
+        </Content>
       </Container>
+      <Footer />
     </>
   );
 };
