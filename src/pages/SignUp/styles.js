@@ -1,43 +1,54 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
+
+// Helper function para aplicar estilos flex com base nas props
+const flexCenter = (direction = "row", justifyContent = "center", alignItems = "center") => `
+  display: flex;
+  flex-direction: ${direction};
+  justify-content: ${justifyContent};
+  align-items: ${alignItems};
+`;
 
 export const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
-  justify-content: space-around;
-  width: 480px;
+  ${flexCenter()};
+  max-width: 1112px;
   width: 100%;
+  margin: auto;
   height: 100vh;
 
-  div {
-    display: flex;
+  a {
+    ${flexCenter("column")};
+    border-radius: 0 0 16px 16px;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    font-size: 1.4rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     flex-direction: column;
-
-    a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-bottom: 64px;
-
-      border-radius: 0 0 16px 16px;
-
-      margin-bottom: 64px;
-      color: ${({ theme }) => theme.COLORS.LIGHT_100};
-      font-size: 1.4rem;
-      background-color: ${({ theme }) => theme.COLORS.DARK_700};
+    img {
+      width: 278px;
+      height: 44px;
     }
   }
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  padding: 64px 64px 32px 64px;
+export const Content = styled.div`
+  ${flexCenter("row", "space-between")};
+  width: 100%;
+  padding: 0 56px;
 
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    flex-direction: column;
+    padding: 0;
+  }
+`;
+
+export const Form = styled.form`
+  ${flexCenter("column")};
+  gap: 32px;
+  padding: 64px;
+  max-width: 476px;
   width: 100%;
   height: auto;
   border-radius: 16px 16px 0 0;
@@ -49,8 +60,21 @@ export const Form = styled.form`
     font-weight: 400;
     line-height: 140%;
     margin-bottom: 32px;
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+      display: none;
+    }
   }
+
   input {
-    width: 348px;
+    width: 100%;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    background-color: transparent;
+    padding: 54px;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
+    padding: 34px;
   }
 `;

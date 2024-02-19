@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Brand } from "../../components/Brand";
-import { Container, Form } from "./styles";
+import { Container, Content, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonRed } from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,8 +25,8 @@ export function SignIn() {
   }
   return (
     <Container>
-      <Brand logo={logoCustumer} />
-      <div>
+      <Content>
+        <Brand logo={logoCustumer} />
         <Form>
           <h1>Faça o login</h1>
 
@@ -50,9 +50,9 @@ export function SignIn() {
             title="Entrar"
             onClick={handleSingIn}
           />
+          <Link to="/register">Criar conta</Link>
         </Form>
-        <Link to="/register">Criar conta</Link>
-      </div>
+      </Content>
     </Container>
   );
 }
