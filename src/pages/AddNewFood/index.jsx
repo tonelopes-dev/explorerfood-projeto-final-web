@@ -40,9 +40,11 @@ export const AddNewFood = () => {
   }
 
   function handleAddIngredient() {
+    if (newIngredient === "") {
+      return;
+    }
     setIngredientsName((prevState) => [...prevState, newIngredient]);
     setNewIngredient("");
-    console.log(ingredientsName);
   }
   function handleRemoveIngredient(deleted) {
     setIngredientsName((prevState) => prevState.filter((ingredient) => ingredient !== deleted));
@@ -77,6 +79,10 @@ export const AddNewFood = () => {
     navigate(-1);
   }
   async function handleCreatNewProduct() {
+    if (!titleFood || !selectedCategory || !description || !ingredientsName || !priceInCents || !user.id) {
+      return alert("Todos os campos são obrigatórios.");
+    }
+
     const priceInCents = convertStringToNumber(price);
 
     const food = {
@@ -105,7 +111,7 @@ export const AddNewFood = () => {
           <img
             src="/assets/icons/CaretLeft.svg"
             alt=""
-          />{" "}
+          />
           voltar
         </ButtonBack>
 
@@ -196,7 +202,7 @@ export const AddNewFood = () => {
                 type="text"
                 value={price}
                 placeholder="79,00"
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => setPrice(e.target.value.trim())}
               />
             </div>
           </InputPrice>

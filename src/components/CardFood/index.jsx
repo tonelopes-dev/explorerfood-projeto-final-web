@@ -33,9 +33,9 @@ export const CardFood = ({ role, title, price, description, imageUrl, id, ...res
           />
           {[USER_ROLE.ADMIN].includes(role) && (
             <img
-              className="icon-like"
+              className="icon-pencil"
               src="/assets/icons/Pencil.svg"
-              alt={`foto do ${title}`}
+              alt={`icone do lapis, ao clicar encaminhar para a tela de editar prato`}
               onClick={() => handleFoodDetails(id)}
             />
           )}

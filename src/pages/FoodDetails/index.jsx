@@ -1,5 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ButtonBack, Container, Content, DetailsFood, FoodContainer, IngredientsFood, PhotoFood } from "./styles";
+import {
+  Button,
+  ButtonBack,
+  Container,
+  Content,
+  DetailsFood,
+  FoodContainer,
+  IngredientsFood,
+  PhotoFood,
+} from "./styles";
 import { Header } from "../../components/Header";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
@@ -65,19 +74,21 @@ export const FoodDetails = () => {
                   <span key={index}>{ingredient.name}</span>
                 ))}
               </IngredientsFood>
-              {[USER_ROLE.ADMIN].includes(user.role) ? (
-                <div>
-                  <ButtonRed
-                    title="Editar prato"
-                    onClick={() => handleEditFood(data.id)}
+              <Button>
+                {[USER_ROLE.ADMIN].includes(user.role) ? (
+                  <div>
+                    <ButtonRed
+                      title="Editar prato"
+                      onClick={() => handleEditFood(data.id)}
+                    />
+                  </div>
+                ) : (
+                  <QuantityController
+                    showPrice
+                    value={price}
                   />
-                </div>
-              ) : (
-                <QuantityController
-                  showPrice
-                  value={price}
-                />
-              )}
+                )}
+              </Button>
             </DetailsFood>
           </FoodContainer>
         </Content>

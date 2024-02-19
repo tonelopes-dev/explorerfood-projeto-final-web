@@ -46,7 +46,6 @@ export const Home = () => {
       setDesserts(dessert.data);
       const drink = await api.get("/foods/?categoryFood=drink");
       setDrinks(drink.data);
-      console.log(meal.data, dessert.data, drink.data);
     }
 
     fetchFoods();

@@ -10,10 +10,12 @@ export const Container = styled.div`
 `;
 export const Banner = styled.section`
   display: flex;
-  width: 100%;
-  height: 260px;
+  width: 93%;
+  max-height: 260px;
+  min-height: 120px;
+  height: 100%;
+  margin: 0 auto;
   align-items: center;
-
   margin-top: 164px;
   margin-bottom: 62px;
   background: linear-gradient(
@@ -23,25 +25,63 @@ export const Banner = styled.section`
     rgba(9, 30, 38, 1) 0%,
     rgba(0, 19, 28, 1) 100%
   );
+  @media (max-width: 875px) {
+    margin-top: 77px;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    margin-top: 30px;
+  }
 `;
 export const ImageBanner = styled.div`
+  margin-left: -78px;
+
+  margin-top: -143px;
+  align-items: flex-end;
+  overflow: hidden;
   img {
-    margin-left: -78px;
-    margin-top: -90px;
-    align-items: flex-end;
-    overflow: scroll;
     width: 100%;
     height: auto;
-    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-      margin-top: -18px;
-    }
+  }
+  @media (max-width: 875px) {
+    margin-top: -67px;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    margin-top: -30px;
   }
 `;
 export const TitleBanner = styled.div`
+  min-width: 442px;
+  padding-right: 20px;
   h1 {
     font-family: var(--poppins);
     font-size: 4rem;
     font-weight: 500;
+
+    font-style: normal;
+    line-height: 140%;
+    @media (max-width: 875px) {
+      font-size: 3.6rem;
+    }
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 3.4rem;
+    }
+    @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+      font-size: 1.8rem;
+    }
+  }
+  p {
+    @media (max-width: 875px) {
+      font-size: 1.6rem;
+    }
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 1.2rem;
+    }
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    min-width: 390px;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    min-width: 210px;
   }
 `;
 export const Content = styled.main`
@@ -66,6 +106,7 @@ export const SectionContent = styled.div`
 `;
 
 export const ContentGradient = styled.div`
+  display: none;
   position: absolute;
   z-index: 1;
   right: 0;

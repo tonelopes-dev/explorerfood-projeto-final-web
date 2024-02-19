@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   ButtonBack,
@@ -11,14 +12,14 @@ import {
   InputNameFood,
   InputPrice,
 } from "./styles";
-import { Header } from "../../components/Header";
-import { IngredientItem } from "../../components/IngredientItem";
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
 
 import { Footer } from "../../components/Footer";
-import { userAuth } from "../../hooks/auth";
+import { Header } from "../../components/Header";
 import { ButtonRed } from "../../components/Button";
+import { IngredientItem } from "../../components/IngredientItem";
+
+import { api } from "../../services/api";
+import { userAuth } from "../../hooks/auth";
 
 export const EditFood = () => {
   const [data, setData] = useState(null);
@@ -81,6 +82,9 @@ export const EditFood = () => {
   }
   async function handleUpdateProduct() {
     const priceInCents = convertStringToNumber(price);
+    if (!titleFood || !selectedCategory || !description || !ingredientsName || !priceInCents || !user.id) {
+      return alert("Todos os campos são obrigatórios.");
+    }
     const updated = {
       title: titleFood,
       category: selectedCategory,
@@ -216,7 +220,7 @@ export const EditFood = () => {
               type="text"
               value={price}
               placeholder="79,00"
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(e.target.value.trim())}
             />
           </div>
         </InputPrice>

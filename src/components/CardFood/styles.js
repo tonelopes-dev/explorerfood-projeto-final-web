@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.section`
   display: flex;
@@ -15,9 +16,28 @@ export const Container = styled.section`
   border: 1px solid ${({ theme }) => theme.COLORS.DARK_300};
   .price-item {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
-    font-size: 32px;
+    font-size: 3.2rem;
     line-height: 160%;
     margin: 15px 0;
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 1.6rem;
+      line-height: 100%;
+      margin: 0 0;
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    width: 210px;
+    height: 292px;
+    padding: 24px;
+    gap: 12px;
+    .quantity-controller {
+      flex-direction: column;
+      margin: 0 0;
+    }
+    .button-red {
+      height: 32px !important;
+    }
   }
 `;
 export const Content = styled.div`
@@ -28,25 +48,48 @@ export const Content = styled.div`
 
 export const PhotoFood = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-end;
+  flex-direction: column-reverse;
+  width: 90%;
   margin-top: 24px;
-  margin-right: -36px;
+  /*  margin-right: -36px; */
   margin-bottom: 15px;
-  gap: 16px;
+
   .photo-food {
     cursor: pointer;
     width: 176px;
     flex: 1;
   }
+
+  .icon-pencil {
+    align-self: flex-end;
+    width: 24px;
+    height: 24px;
+  }
+
   .icon-like {
     flex: 2;
+    align-self: flex-end;
     width: 24px;
     height: 24px;
     cursor: pointer;
   }
   img:hover {
     filter: brightness(0.9);
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    margin-top: 0px;
+    margin-right: 0px;
+    flex-direction: column-reverse;
+    align-items: center;
+    .icon-pencil {
+      align-self: end;
+    }
+    .photo-food {
+      width: 88px;
+      height: 88px;
+    }
   }
 `;
 
@@ -58,6 +101,17 @@ export const Description = styled.div`
     font-family: var(--poppins);
     font-size: 2.4rem;
     margin-bottom: 15px;
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 24px;
+      margin-bottom: 12px;
+    }
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    p {
+      display: none;
+    }
   }
 `;
 export const AmountFood = styled.div`

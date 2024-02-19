@@ -82,3 +82,17 @@ export const IngredientsFood = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 `;
+
+export const Button = styled.div`
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    align-items: end;
+    width: 340px;
+    height: 48px;
+  }
+`;

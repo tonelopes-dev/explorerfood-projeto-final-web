@@ -7,7 +7,7 @@ export const Container = styled.button`
   background-color: transparent;
   border: none;
   img {
-    width: auto;
-    height: auto;
+    min-width: 100%;
+    min-height: 100%;
   }
 `;

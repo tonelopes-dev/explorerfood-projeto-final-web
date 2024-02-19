@@ -19,7 +19,7 @@ export const QuantityController = ({ value, showPrice }) => {
   }
 
   return (
-    <Container>
+    <Container className="quantity-controller">
       <div className="options">
         <button
           className="button-options"
