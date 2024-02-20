@@ -31,7 +31,7 @@ export const QuantityController = ({ value, showPrice, icon, title }) => {
             className="icon-options-quantity"
           />
         </button>
-        <span>{formatNumber(quantity)}</span>
+        <span className="quantaty">{formatNumber(quantity)}</span>
 
         <button
           className="button-options"

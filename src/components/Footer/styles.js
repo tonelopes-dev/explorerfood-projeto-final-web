@@ -27,6 +27,7 @@ export const Content = styled.div`
     font-size: 1.4rem;
   }
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    padding: 23px 10px;
     span {
       font-size: 1.2rem;
     }

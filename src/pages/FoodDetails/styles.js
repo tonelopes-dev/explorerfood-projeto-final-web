@@ -5,13 +5,15 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1112px;
-  padding: 0 33px 33px 33px;
+  width: 100%;
   margin: auto;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     max-width: 372px;
     width: 100%;
+    padding: 0 8px;
+    padding-bottom: 33px;
   }
 `;
 
