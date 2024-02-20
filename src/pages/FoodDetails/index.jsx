@@ -85,6 +85,8 @@ export const FoodDetails = () => {
                 ) : (
                   <QuantityController
                     showPrice
+                    title="pedir"
+                    icon="/assets/icons/Receipt.svg"
                     value={price}
                   />
                 )}
@@ -92,8 +94,8 @@ export const FoodDetails = () => {
             </DetailsFood>
           </FoodContainer>
         </Content>
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 };

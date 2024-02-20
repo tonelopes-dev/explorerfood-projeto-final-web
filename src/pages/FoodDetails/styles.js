@@ -1,13 +1,18 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1112px;
-
+  padding: 0 33px 33px 33px;
   margin: auto;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    max-width: 372px;
+    width: 100%;
+  }
 `;
 
 export const ButtonBack = styled.button`
@@ -31,9 +36,15 @@ export const ButtonBack = styled.button`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
-
   gap: 48px;
   height: 70vh;
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 372px;
+    margin: auto;
+  }
 `;
 export const PhotoFood = styled.div`
   width: 390px;
@@ -42,6 +53,14 @@ export const PhotoFood = styled.div`
     max-width: 390px;
     width: 100%;
     height: auto;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    width: 264px;
+    height: 264px;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    width: 200px;
+    height: 200px;
   }
 `;
 export const FoodContainer = styled.div`
@@ -58,6 +77,14 @@ export const FoodContainer = styled.div`
     font-weight: 300;
     font-size: 2.4rem;
     margin-bottom: 24px;
+  }
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    h1 {
+      font-size: 2.7rem;
+    }
+    p {
+      font-size: 1.6rem;
+    }
   }
 `;
 export const DetailsFood = styled.div`

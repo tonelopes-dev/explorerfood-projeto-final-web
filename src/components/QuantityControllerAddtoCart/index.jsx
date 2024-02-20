@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "./styles";
 import { ButtonRed } from "../Button";
 
-export const QuantityController = ({ value, showPrice }) => {
+export const QuantityController = ({ value, showPrice, icon, title }) => {
   const [quantity, setQuantity] = useState(0);
 
   // Função para aumentar a quantidade
@@ -45,7 +45,8 @@ export const QuantityController = ({ value, showPrice }) => {
         </button>
       </div>
       <ButtonRed
-        title="incluir"
+        title={title}
+        icon={icon}
         price={value}
         showPrice={showPrice}
         quantity={quantity}

@@ -12,6 +12,9 @@ export const Container = styled.div`
     justify-content: center;
     padding: 0 28px;
   }
+  @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
+    padding: 0 8px;
+  }
 `;
 export const HeaderTop = styled.header`
   max-width: 1120px;
@@ -37,7 +40,7 @@ export const HeaderTop = styled.header`
   }
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     justify-content: space-between;
-
+    gap: 20px;
     .menu-mobile {
       display: block;
     }

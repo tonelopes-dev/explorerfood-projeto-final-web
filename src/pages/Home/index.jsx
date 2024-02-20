@@ -91,6 +91,19 @@ export const Home = () => {
                   spaceBetween={27}
                   navigation={true}
                   modules={[Pagination, Navigation]}
+                  breakpoints={{
+                    200: {
+                      slidesPerView: 2,
+                      spaceBetween: 90,
+                    },
+
+                    500: {
+                      slidesPerView: 3,
+                    },
+                    665: {
+                      spaceBetween: 27,
+                    },
+                  }}
                   className="mySwiper"
                 >
                   <ContentGradient />
@@ -121,6 +134,19 @@ export const Home = () => {
                   spaceBetween={27}
                   navigation={true}
                   modules={[Pagination, Navigation]}
+                  breakpoints={{
+                    200: {
+                      slidesPerView: 2,
+                      spaceBetween: 90,
+                    },
+
+                    500: {
+                      slidesPerView: 3,
+                    },
+                    665: {
+                      spaceBetween: 27,
+                    },
+                  }}
                   className="mySwiper"
                 >
                   <ContentGradient />
@@ -151,6 +177,19 @@ export const Home = () => {
                   spaceBetween={27}
                   navigation={true}
                   modules={[Pagination, Navigation]}
+                  breakpoints={{
+                    200: {
+                      slidesPerView: 2,
+                      spaceBetween: 90,
+                    },
+
+                    500: {
+                      slidesPerView: 3,
+                    },
+                    665: {
+                      spaceBetween: 27,
+                    },
+                  }}
                   className="mySwiper"
                 >
                   <ContentGradient />

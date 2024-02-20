@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "./styles";
 import formatCentsValue from "../../utils/formatCentsValue";
 
-export const ButtonRed = ({ quantity, showPrice, price, title, type = "button", icon: Icon, ...rest }) => {
+export const ButtonRed = ({ quantity, showPrice, price, title = "incluir", type = "button", icon: Icon, ...rest }) => {
   const total = quantity * price;
   const priceFormatted = formatCentsValue(Number(total));
 
@@ -19,7 +19,7 @@ export const ButtonRed = ({ quantity, showPrice, price, title, type = "button", 
             alt=""
           />
         )}
-        {title} {priceFormatted}
+        {title} {` ∙ ${priceFormatted}`}
       </Container>
     );
   }
