@@ -67,6 +67,7 @@ export const Home = () => {
         user={user}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+
       <Container>
         <Banner>
           <ImageBanner>
@@ -212,8 +213,8 @@ export const Home = () => {
             </Section>
           )}
         </Content>
+        <Footer />
       </Container>
-      <Footer />
     </>
   );
 };

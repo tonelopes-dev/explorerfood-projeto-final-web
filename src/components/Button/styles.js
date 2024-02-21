@@ -26,7 +26,7 @@ export const Container = styled.button`
     padding: 2px;
   }
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     img {
       width: 24px;
       height: 24px;

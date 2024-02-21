@@ -3,6 +3,10 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.footer`
   display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
   justify-content: center;
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};

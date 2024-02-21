@@ -10,6 +10,7 @@ export function Input({ isuser = false, border = false, icon: Icon, for: For, la
       <div>
         {Icon && (
           <img
+            className="icon-input"
             src={Icon}
             alt=""
           />

@@ -6,14 +6,32 @@ export const Container = styled.div`
   flex-direction: column;
   max-width: 1112px;
   width: 100%;
-  margin: auto;
+  margin: auto auto;
 
+  flex-wrap: wrap;
+
+  margin-bottom: 77px;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    max-width: 372px;
+    /* max-width: 372px; */
     width: 100%;
     padding: 0 8px;
     padding-bottom: 33px;
+  }
+`;
+export const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 48px;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+    margin: auto;
   }
 `;
 
@@ -28,26 +46,17 @@ export const ButtonBack = styled.button`
   font-weight: bold;
   font-size: 2.4rem;
   text-align: left;
-  margin-top: 24px;
+
   margin-bottom: 42px;
   img {
     width: 24px;
     height: 24px;
   }
-`;
-export const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  height: 70vh;
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 372px;
-    margin: auto;
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    margin-bottom: 22px;
   }
 `;
+
 export const PhotoFood = styled.div`
   width: 390px;
   height: 390px;
@@ -114,8 +123,8 @@ export const IngredientsFood = styled.div`
 
 export const Button = styled.div`
   display: flex;
-  justify-content: start;
-  width: 100%;
+  /* justify-content: start;
+  width: 100%; */
   .content {
     display: flex;
     flex-direction: row;

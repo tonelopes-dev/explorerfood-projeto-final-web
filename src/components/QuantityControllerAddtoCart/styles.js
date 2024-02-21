@@ -12,8 +12,6 @@ export const Container = styled.div`
   padding: 0px 40px;
 
   padding-bottom: 24px;
-  .price {
-  }
 
   .options {
     display: flex;
