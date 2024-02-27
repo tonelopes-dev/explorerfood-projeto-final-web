@@ -12,17 +12,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 import { Header } from "../../components/Header";
-import {
-  Banner,
-  Container,
-  Content,
-  ContentGradient,
-  ImageBanner,
-  Section,
-  SectionContent,
-  TitleBanner,
-  TitleSection,
-} from "./styles";
+import { Banner, Container, Content, ContentGradient, ImageBanner, Section, SectionContent, TitleBanner, TitleSection } from "./styles";
 
 import { CardFood } from "../../components/CardFood";
 import { api } from "../../services/api";

@@ -18,13 +18,7 @@ export const Banner = styled.section`
   align-items: center;
   margin-top: 164px;
   margin-bottom: 62px;
-  background: linear-gradient(
-    180deg,
-    rgba(240, 249, 255, 1) 0%,
-    rgba(0, 255, 38, 1) 0%,
-    rgba(9, 30, 38, 1) 0%,
-    rgba(0, 19, 28, 1) 100%
-  );
+  background: linear-gradient(180deg, rgba(240, 249, 255, 1) 0%, rgba(0, 255, 38, 1) 0%, rgba(9, 30, 38, 1) 0%, rgba(0, 19, 28, 1) 100%);
   @media (max-width: 875px) {
     margin-top: 77px;
   }
@@ -85,6 +79,7 @@ export const TitleBanner = styled.div`
   }
 `;
 export const Content = styled.main`
+  margin-bottom: 40px;
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     padding: 24px;
   }
@@ -116,12 +111,7 @@ export const ContentGradient = styled.div`
 
   width: 100%;
   background: rgb(0, 7, 10);
-  background: linear-gradient(
-    270deg,
-    rgba(0, 7, 10, 0.6474964985994398) 0%,
-    rgba(0, 7, 10, 0) 50%,
-    rgba(0, 7, 10, 0.6530987394957983) 100%
-  );
+  background: linear-gradient(270deg, rgba(0, 7, 10, 0.6474964985994398) 0%, rgba(0, 7, 10, 0) 50%, rgba(0, 7, 10, 0.6530987394957983) 100%);
 `;
 
 export const TitleSection = styled.h1`

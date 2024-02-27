@@ -5,9 +5,10 @@ import formatCentsValue from "../../utils/formatCentsValue";
 import { useNavigate } from "react-router-dom";
 import { QuantityController } from "../QuantityControllerAddtoCart";
 import { USER_ROLE } from "../../utils/roles";
+import { api } from "../../services/api";
 
 export const CardFood = ({ role, title, price, description, imageUrl, id, ...rest }) => {
-  const foodImageUrl = `http://localhost:3333/files/${imageUrl}`;
+  const foodImageUrl = `https://explorerfood-projeto-final-api.onrender.com/files/${imageUrl}`;
 
   const navigate = useNavigate();
 
