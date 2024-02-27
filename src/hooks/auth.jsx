@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password }, { withCredentials: true });
       const { user } = response.data;
 
-      localStorage.setItem("@foodexplorer:user", JSON.stringify(user), { withCredentials: true });
+      localStorage.setItem("@foodexplorerproject:user", JSON.stringify(user), { withCredentials: true });
 
       setData({ user });
     } catch (error) {
@@ -24,7 +24,7 @@ function AuthProvider({ children }) {
   }
 
   async function signOut() {
-    localStorage.removeItem("@foodexplorer:user");
+    localStorage.removeItem("@foodexplorerproject:user");
     setData({});
   }
   async function addNewProduct({ food, imageFoodFile }) {
@@ -73,17 +73,13 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem("@foodexplorer:user");
+    const user = localStorage.getItem("@foodexplorerproject:user");
 
     if (user) {
       setData({ user: JSON.parse(user) });
     }
   }, []);
-  return (
-    <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>{children}</AuthContext.Provider>;
 }
 
 function userAuth() {

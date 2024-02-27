@@ -1,14 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  Button,
-  ButtonBack,
-  Container,
-  Content,
-  DetailsFood,
-  FoodContainer,
-  IngredientsFood,
-  PhotoFood,
-} from "./styles";
+import { Button, ButtonBack, Container, Content, DetailsFood, FoodContainer, IngredientsFood, PhotoFood } from "./styles";
 import { Header } from "../../components/Header";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
@@ -21,6 +12,7 @@ import { ButtonRed } from "../../components/Button";
 export const FoodDetails = () => {
   const { user } = userAuth();
   const [data, setData] = useState(null);
+  const [foodImageUrl, setFoodImageUrl] = useState("");
   const params = useParams();
   const navigate = useNavigate();
 
@@ -33,17 +25,32 @@ export const FoodDetails = () => {
   }
 
   useEffect(() => {
+    let active = true; // Flag para verificar se o componente está montado
     async function fetchFood() {
       const response = await api.get(`/foods/${params.id}`);
       setData(response.data);
+
+      // Obtendo o conteúdo binário da imagem
+      const imageResponse = await api.get(`/files/${response.data.url_image}`, { responseType: "blob" });
+      const imageUrl = URL.createObjectURL(imageResponse.data);
+      if (active) {
+        setFoodImageUrl(imageUrl);
+      }
     }
 
     fetchFood();
+    // Função de limpeza que será chamada quando o componente for desmontado
+    return () => {
+      active = false; // Indica que o componente foi desmontado
+      if (foodImageUrl) {
+        URL.revokeObjectURL(foodImageUrl); // Libera a memória usada pela URL do blob
+      }
+    };
   }, [params.id]);
+
   if (!data) {
     return <div>Carregando...</div>; // Ou qualquer outra representação de loading
   }
-  const foodImageUrl = `http://localhost:3333/files/${data.url_image}`;
   const price = Number(data.price);
 
   return (
