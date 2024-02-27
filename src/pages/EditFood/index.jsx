@@ -182,7 +182,12 @@ export const EditFood = () => {
             value={selectedCategory}
             onChange={handleCategoryChange}
           >
-            <option value="">--Categorias--</option>
+            <option
+              value="default"
+              desabled
+            >
+              --Categorias--
+            </option>
             <option value="meal">Refeição</option>
             <option value="dessert">Sobremesas</option>
             <option value="drink">Bebidas</option>
