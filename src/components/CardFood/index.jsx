@@ -8,8 +8,8 @@ import { USER_ROLE } from "../../utils/roles";
 import { api } from "../../services/api";
 
 export const CardFood = ({ role, title, price, description, imageUrl, id, ...rest }) => {
-  // const foodImageUrl = `https://explorerfood-projeto-final-api.onrender.com/files/${imageUrl}`;
-  const foodImageUrl = `http://localhost:3333/files/${imageUrl}`;
+  const foodImageUrl = `https://explorerfood-projeto-final-api.onrender.com/files/${imageUrl}`;
+  /* const foodImageUrl = `http://localhost:3333/files/${imageUrl}`; */
 
   const navigate = useNavigate();
 
