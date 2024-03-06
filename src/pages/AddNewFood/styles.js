@@ -53,7 +53,6 @@ export const Content = styled.form`
 
 export const FileImageFood = styled.div`
   display: flex;
-
   flex-direction: column;
   width: 230px;
   justify-content: start;
@@ -72,6 +71,7 @@ export const FileImageFood = styled.div`
     display: none;
   }
   .custom-file-upload {
+    cursor: pointer;
     display: flex;
     align-items: center;
     border-radius: 8px;

@@ -33,7 +33,7 @@ export const AddNewFood = () => {
 
   const navigate = useNavigate();
   const { user, addNewProduct } = userAuth();
-
+  console.log(user.id);
   function handleChangeImageFood(event) {
     const file = event.target.files[0];
     setImageFood(file);
@@ -79,7 +79,7 @@ export const AddNewFood = () => {
     navigate(-1);
   }
   async function handleCreatNewProduct() {
-    if (!titleFood || !selectedCategory || !description || !ingredientsName || !priceInCents || !user.id) {
+    if (!titleFood || !selectedCategory || !description || !ingredientsName || !price || !user.id) {
       return alert("Todos os campos são obrigatórios.");
     }
 

@@ -101,7 +101,7 @@ export const EditFood = () => {
   async function handleDeleteProduct() {
     await api.delete(`/foods/${params.id}`);
     alert("Produto deletado!");
-    navigate("/add-new-food/");
+    navigate("/");
   }
 
   useEffect(() => {

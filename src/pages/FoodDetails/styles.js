@@ -60,6 +60,7 @@ export const ButtonBack = styled.button`
 export const PhotoFood = styled.div`
   width: 390px;
   height: 390px;
+
   img {
     max-width: 390px;
     width: 100%;
