@@ -8,6 +8,7 @@ export function MenuMobile() {
         <img
           src="/assets/icons/Close.svg"
           alt="icone de fechar o menu"
+          loading="lazy"
         />
         <p>Menu</p>
       </HeaderMobile>

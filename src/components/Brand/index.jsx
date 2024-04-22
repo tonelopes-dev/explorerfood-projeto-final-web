@@ -12,6 +12,7 @@ export const Brand = ({ logo }) => {
       <img
         src={logo}
         alt="logo food expolorer"
+        loading="lazy"
       />
     </Container>
   );

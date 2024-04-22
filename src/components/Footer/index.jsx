@@ -8,6 +8,7 @@ export const Footer = () => {
         <img
           src="/assets/icons/logo-gray.png"
           alt=""
+          loading="lazy"
         />
         <span>© 2023 - Todos os direitos reservados.</span>
       </Content>

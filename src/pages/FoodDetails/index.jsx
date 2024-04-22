@@ -61,6 +61,7 @@ export const FoodDetails = () => {
           <img
             src="/assets/icons/CaretLeft.svg"
             alt=""
+            loading="lazy"
           />{" "}
           voltar
         </ButtonBack>
@@ -69,6 +70,7 @@ export const FoodDetails = () => {
             <img
               src={foodImageUrl}
               alt={`imagem do ${data.title}`}
+              loading="lazy"
             />
           </PhotoFood>
 

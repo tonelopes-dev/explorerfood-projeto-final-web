@@ -44,11 +44,13 @@ export function IngredientItem({ isNew = false, value, onClick, ...rest }) {
           <img
             src={iconAdd}
             alt=""
+            loading="lazy"
           />
         ) : (
           <img
             src={iconDelete}
             alt=""
+            loading="lazy"
           />
         )}
       </button>

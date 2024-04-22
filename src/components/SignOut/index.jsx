@@ -18,6 +18,7 @@ export const SignOut = () => {
       <img
         src="/assets/icons/SignOut.svg"
         alt="icone de deslogar da página."
+        loading="lazy"
       />
     </Logout>
   );

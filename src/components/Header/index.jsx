@@ -45,6 +45,7 @@ export function Header({ user, children, ...rest }) {
                 <img
                   src="/assets/icons/Close.svg"
                   alt="icone de fechar o menu"
+                  loading="lazy"
                 />
                 <p>Menu</p>
               </CloseMenuMobile>
@@ -56,6 +57,7 @@ export function Header({ user, children, ...rest }) {
                     className="icon-input"
                     src="/assets/icons/search.svg"
                     alt=""
+                    loading="lazy"
                   />
 
                   <input placeholder="Busque por pratos ou ingredientes" />
@@ -75,6 +77,7 @@ export function Header({ user, children, ...rest }) {
             <img
               src="/assets/icons/Menu.svg"
               alt="icone de deslogar da página."
+              loading="lazy"
             />
           </Menu>
           <BrandSection>
@@ -111,6 +114,7 @@ export function Header({ user, children, ...rest }) {
                 <img
                   src="/assets/icons/Close.svg"
                   alt="icone de fechar o menu"
+                  loading="lazy"
                 />
                 <p>Menu</p>
               </CloseMenuMobile>
@@ -122,6 +126,7 @@ export function Header({ user, children, ...rest }) {
                     className="icon-input"
                     src="/assets/icons/search.svg"
                     alt=""
+                    loading="lazy"
                   />
 
                   <input placeholder="Busque por pratos ou ingredientes" />
@@ -142,6 +147,7 @@ export function Header({ user, children, ...rest }) {
               <img
                 src="/assets/icons/Menu.svg"
                 alt="icone de deslogar da página."
+                loading="lazy"
               />
             </Menu>
             <Brand logo={logoCustumer} />
@@ -163,6 +169,7 @@ export function Header({ user, children, ...rest }) {
               <img
                 src="/assets/icons/Receipt.svg"
                 alt="icone de deslogar da página."
+                loading="lazy"
               />
             </ButtonReceipt>
 

@@ -111,6 +111,7 @@ export const AddNewFood = () => {
           <img
             src="/assets/icons/CaretLeft.svg"
             alt=""
+            loading="lazy"
           />
           voltar
         </ButtonBack>
@@ -128,6 +129,7 @@ export const AddNewFood = () => {
                 src="/assets/icons/UploadSimple.svg"
                 alt=""
                 className="custom-label-image"
+                loading="lazy"
               />
               <input
                 type="file"

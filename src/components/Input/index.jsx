@@ -13,6 +13,7 @@ export function Input({ isuser = false, border = false, icon: Icon, for: For, la
             className="icon-input"
             src={Icon}
             alt=""
+            loading="lazy"
           />
         )}
         <input

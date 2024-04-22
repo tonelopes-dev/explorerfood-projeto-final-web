@@ -35,6 +35,7 @@ export const CardFood = ({ role, title, price, description, imageUrl, id, ...res
               src="/assets/icons/Pencil.svg"
               alt="Ícone de lápis, clique para editar prato"
               onClick={handleFoodDetails}
+              loading="lazy"
             />
           )}
           {role === USER_ROLE.CUSTOMER && (

@@ -78,7 +78,7 @@ export const EditFood = () => {
   };
 
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
   async function handleUpdateProduct() {
     const priceInCents = convertStringToNumber(price);
@@ -130,6 +130,7 @@ export const EditFood = () => {
           <img
             src="/assets/icons/CaretLeft.svg"
             alt=""
+            loading="lazy"
           />{" "}
           voltar
         </ButtonBack>
@@ -146,6 +147,7 @@ export const EditFood = () => {
               src="/assets/icons/UploadSimple.svg"
               alt=""
               className="custom-label-image"
+              loading="lazy"
             />
             <input
               type="file"

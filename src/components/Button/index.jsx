@@ -17,6 +17,7 @@ export const ButtonRed = ({ quantity, showPrice, price, title = "incluir", type 
           <img
             src={Icon}
             alt=""
+            loading="lazy"
           />
         )}
         {title} {` ∙ ${priceFormatted}`}
@@ -34,6 +35,7 @@ export const ButtonRed = ({ quantity, showPrice, price, title = "incluir", type 
         <img
           src={Icon}
           alt=""
+          loading="lazy"
         />
       )}
       {title}

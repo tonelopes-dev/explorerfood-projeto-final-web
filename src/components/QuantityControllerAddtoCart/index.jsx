@@ -29,6 +29,7 @@ export const QuantityController = ({ value, showPrice, icon, title }) => {
             src="/assets/icons/Minus.svg"
             alt=""
             className="icon-options-quantity"
+            loading="lazy"
           />
         </button>
         <span className="quantaty">{formatNumber(quantity)}</span>
@@ -41,6 +42,7 @@ export const QuantityController = ({ value, showPrice, icon, title }) => {
             src="/assets/icons/Plus.svg"
             alt=""
             className="icon-options-quantity"
+            loading="lazy"
           />
         </button>
       </div>
