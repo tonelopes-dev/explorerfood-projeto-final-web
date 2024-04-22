@@ -29,14 +29,24 @@ export const Home = () => {
   const { user } = userAuth();
 
   useEffect(() => {
-    async function fetchFoods() {
-      const meal = await api.get("/foods/?categoryFood=meal");
-      setMeals(meal.data);
-      const dessert = await api.get("/foods/?categoryFood=dessert");
-      setDesserts(dessert.data);
-      const drink = await api.get("/foods/?categoryFood=drink");
-      setDrinks(drink.data);
-    }
+    const fetchFoods = async () => {
+      try {
+        // Use Promise.all to fetch all categories in parallel
+        const [mealResponse, dessertResponse, drinkResponse] = await Promise.all([
+          api.get("/foods/?categoryFood=meal"),
+          api.get("/foods/?categoryFood=dessert"),
+          api.get("/foods/?categoryFood=drink"),
+        ]);
+
+        // Set state with fetched data
+        setMeals(mealResponse.data);
+        setDesserts(dessertResponse.data);
+        setDrinks(drinkResponse.data);
+      } catch (error) {
+        console.error("Failed to fetch foods", error);
+        // Optionally update the state to indicate the error or handle the error as needed
+      }
+    };
 
     fetchFoods();
   }, []);
@@ -64,6 +74,7 @@ export const Home = () => {
             <img
               src="/assets/banner/banner-food.png"
               alt=""
+              loading="lazy"
             />
           </ImageBanner>
 

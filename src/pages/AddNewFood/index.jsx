@@ -188,6 +188,7 @@ export const AddNewFood = () => {
                 className="input-ingredient"
                 placeholder="Adicionar"
                 isNew
+                id="ingredients"
                 value={newIngredient}
                 onChange={(e) => setNewIngredient(e.target.value)}
                 onClick={handleAddIngredient}
@@ -200,6 +201,7 @@ export const AddNewFood = () => {
               <p>R$ </p>
               <input
                 type="text"
+                id="price"
                 value={price}
                 placeholder="79,00"
                 onChange={(e) => setPrice(e.target.value.trim())}
@@ -213,7 +215,7 @@ export const AddNewFood = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               name=""
-              id=""
+              id="description"
               cols="100"
               rows="100"
             ></textarea>

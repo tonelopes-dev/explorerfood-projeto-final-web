@@ -1,28 +1,23 @@
 import React from "react";
-
 import { Container, Content, Description, PhotoFood } from "./styles";
 import formatCentsValue from "../../utils/formatCentsValue";
 import { useNavigate } from "react-router-dom";
-import { QuantityController } from "../QuantityControllerAddtoCart";
+import { QuantityController } from "../QuantityControllerAddtoCart"; // Certifique-se de exportar corretamente o QuantityController
 import { USER_ROLE } from "../../utils/roles";
 import { api } from "../../services/api";
 
 export const CardFood = ({ role, title, price, description, imageUrl, id, ...rest }) => {
-  const foodImageUrl = `https://explorerfood-projeto-final-api.onrender.com/files/${imageUrl}`;
-  /* const foodImageUrl = `http://localhost:3333/files/${imageUrl}`; */
-
   const navigate = useNavigate();
+  const foodImageUrl = `https://explorerfood-projeto-final-api.onrender.com/files/${imageUrl}`;
 
-  function handleFoodDescription(id) {
-    navigate(`/foods-details/${id}`);
-  }
-  function handleFoodDetails(id) {
-    navigate(`/edit-food/${id}`);
-  }
+  const handleFoodDescription = () => navigate(`/foods-details/${id}`);
+  const handleFoodDetails = () => navigate(`/edit-food/${id}`);
 
+  // Componente de Loading simplificado, caso seja necessário
   if (!title) {
-    return <div>Loading...{title}</div>;
+    return <div>Carregando...</div>;
   }
+
   return (
     <Container {...rest}>
       <Content>
@@ -31,32 +26,33 @@ export const CardFood = ({ role, title, price, description, imageUrl, id, ...res
             className="photo-food"
             src={foodImageUrl}
             alt="foto do alimento"
-            onClick={() => handleFoodDescription(id)}
+            onClick={handleFoodDescription}
+            loading="lazy"
           />
-          {[USER_ROLE.ADMIN].includes(role) && (
+          {role === USER_ROLE.ADMIN && (
             <img
               className="icon-pencil"
               src="/assets/icons/Pencil.svg"
-              alt={`icone do lapis, ao clicar encaminhar para a tela de editar prato`}
-              onClick={() => handleFoodDetails(id)}
+              alt="Ícone de lápis, clique para editar prato"
+              onClick={handleFoodDetails}
             />
           )}
-          {[USER_ROLE.CUSTOMER].includes(role) && (
+          {role === USER_ROLE.CUSTOMER && (
             <img
               className="icon-like"
               src="/assets/icons/Heart.svg"
               alt={`foto do ${title}`}
+              loading="lazy"
             />
           )}
         </PhotoFood>
         <Description>
-          <h1>{title ? title : "Loading..."}</h1>
+          <h1>{title}</h1>
           <p>{description}</p>
         </Description>
-
         <p className="price-item">{formatCentsValue(price)}</p>
       </Content>
-      {[USER_ROLE.CUSTOMER].includes(role) && <QuantityController />}
+      {role === USER_ROLE.CUSTOMER && <QuantityController />}
     </Container>
   );
 };

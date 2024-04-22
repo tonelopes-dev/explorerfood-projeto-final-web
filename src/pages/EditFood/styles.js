@@ -145,7 +145,6 @@ export const InputIngredients = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  width: 75%;
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
@@ -157,7 +156,8 @@ export const InputIngredients = styled.div`
   .container-ingredients {
     border-radius: 8px;
     gap: 16px;
-    padding: 8px 16px;
+    padding: 24px 12px;
+
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     display: flex;
     flex-wrap: wrap;
