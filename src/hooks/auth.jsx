@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../services/api";
 
 export const AuthContext = createContext({});
-import { api } from "../services/api";
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
@@ -10,9 +10,7 @@ function AuthProvider({ children }) {
     try {
       const response = await api.post("/sessions", { email, password }, { withCredentials: true });
       const { user } = response.data;
-
-      localStorage.setItem("@foodexplorerproject:user", JSON.stringify(user), { withCredentials: true });
-
+      localStorage.setItem("@foodexplorerproject:user", JSON.stringify(user));
       setData({ user });
     } catch (error) {
       if (error.response) {
@@ -27,6 +25,7 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@foodexplorerproject:user");
     setData({});
   }
+
   async function addNewProduct({ food, imageFoodFile }) {
     try {
       const responseId = await api.post(`/foods/`, food);
@@ -49,6 +48,7 @@ function AuthProvider({ children }) {
       }
     }
   }
+
   async function updateProduct({ food, imageFoodFile }) {
     try {
       if (imageFoodFile) {
@@ -73,12 +73,25 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem("@foodexplorerproject:user");
+    async function checkSession() {
+      try {
+        const response = await api.get("/sessions/validated", { withCredentials: true });
+        const { user } = response.data;
+        setData({ user });
+      } catch (error) {
+        console.log("Sessão não válida ou expirada");
+        localStorage.removeItem("@foodexplorerproject:user");
+        setData({});
+      }
+    }
 
+    const user = localStorage.getItem("@foodexplorerproject:user");
     if (user) {
       setData({ user: JSON.parse(user) });
+      checkSession(); // Revalida a sessão no carregamento do aplicativo
     }
   }, []);
+
   return <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>{children}</AuthContext.Provider>;
 }
 
