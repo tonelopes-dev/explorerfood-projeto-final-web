@@ -7,8 +7,8 @@ export const SignOut = () => {
   const { signOut } = userAuth();
   const navigate = useNavigate();
   function handleSignOut() {
-    navigate("/");
     signOut();
+    navigate("/");
   }
   return (
     <Logout

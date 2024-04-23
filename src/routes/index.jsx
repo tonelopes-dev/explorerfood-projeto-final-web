@@ -10,11 +10,10 @@ export function Routes() {
   const { user, signOut } = userAuth();
 
   useEffect(() => {
-    // Esta função agora assume que a validação e manutenção da sessão são tratadas centralmente no AuthProvider
-    if (!user) {
-      signOut(); // Garante que o usuário seja redirecionado para o login se não estiver autenticado
+    if (user === null) {
+      signOut();
     }
-  }, [user, signOut]);
+  }, [user]);
 
   function AccessRoute() {
     switch (user?.role) {

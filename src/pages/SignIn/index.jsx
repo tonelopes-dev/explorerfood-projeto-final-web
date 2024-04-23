@@ -13,25 +13,31 @@ export function SignIn() {
   const [password, setPassword] = useState("");
 
   const { signIn } = userAuth();
-
   const navigate = useNavigate();
 
-  function handleSingIn() {
+  // Função para realizar o login
+  function handleSignIn() {
     if (!email || !password) {
       return alert("Por favor preencha todos os campos!");
     }
-    navigate("/");
-    signIn({ email, password });
+    signIn({ email, password })
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        // Lida com erros de autenticação
+        alert("Falha no login, verifique suas credenciais!");
+      });
   }
+
   return (
     <Container>
       <Content>
         <Brand logo={logoCustumer} />
         <Form>
           <h1>Faça o login</h1>
-
           <Input
-            isuser={true.toString()}
+            isuser="true"
             label="Email"
             autoComplete="username"
             placeholder="Exemplo: exemplo@exemplo.com.br"
@@ -39,7 +45,7 @@ export function SignIn() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
-            isuser={true.toString()}
+            isuser="true"
             label="Senha"
             autoComplete="current-password"
             placeholder="No mínimo 6 caracteres"
@@ -48,7 +54,7 @@ export function SignIn() {
           />
           <ButtonRed
             title="Entrar"
-            onClick={handleSingIn}
+            onClick={handleSignIn}
           />
           <Link to="/register">Criar conta</Link>
         </Form>

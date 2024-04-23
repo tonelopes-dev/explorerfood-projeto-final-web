@@ -32,8 +32,8 @@ export function Header({ user, children, ...rest }) {
     navigate("/add-new-food/");
   }
   function handleSignOut() {
-    navigate("/");
     signOut();
+    navigate("/");
   }
   return (
     <Container>

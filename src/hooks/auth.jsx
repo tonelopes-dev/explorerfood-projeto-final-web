@@ -26,28 +26,21 @@ function AuthProvider({ children }) {
     setData({});
   }
 
-  async function addNewProduct({ food, imageFoodFile }) {
+  const addNewProduct = async ({ food, imageFoodFile }) => {
     try {
       const responseId = await api.post(`/foods/`, food);
-
-      if (imageFoodFile) {
+      if (imageFoodFile && ["image/jpeg", "image/png"].includes(imageFoodFile.type) && imageFoodFile.size < MAX_SIZE) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("photo-food", imageFoodFile);
-
         const response = await api.patch(`/foods/photo-food/${responseId.data.food_id}`, fileUploadForm);
-
         food.url_image = response.data.url_image;
       }
       alert("Produto adicionado com sucesso!");
       return responseId.data.food_id;
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("Não foi possível atualizar o produto.");
-      }
+      alert("Não foi possível atualizar o produto.");
     }
-  }
+  };
 
   async function updateProduct({ food, imageFoodFile }) {
     try {
@@ -75,7 +68,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     async function checkSession() {
       try {
-        const response = await api.get("/sessions/validated", { withCredentials: true });
+        const response = await api.get("/users/validated", { withCredentials: true });
         const { user } = response.data;
         setData({ user });
       } catch (error) {
@@ -88,9 +81,9 @@ function AuthProvider({ children }) {
     const user = localStorage.getItem("@foodexplorerproject:user");
     if (user) {
       setData({ user: JSON.parse(user) });
-      checkSession(); // Revalida a sessão no carregamento do aplicativo
+      checkSession();
     }
-  }, []);
+  }, []); // Removed unnecessary dependency
 
   return <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>{children}</AuthContext.Provider>;
 }
