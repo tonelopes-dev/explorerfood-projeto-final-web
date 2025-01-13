@@ -5,24 +5,24 @@ import {
   Container,
   Content,
   FileImageFood,
+  Image,
   InputCategory,
   InputDescription,
   InputIngredients,
   InputNameFood,
   InputPrice,
+  ImageContainer,
 } from "./styles";
 import { Header } from "../../components/Header";
 import { IngredientItem } from "../../components/IngredientItem";
 import { useState } from "react";
-import { api } from "../../services/api";
 
 import { Footer } from "../../components/Footer";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 import { ButtonRed } from "../../components/Button";
+import { Salad } from "lucide-react";
 
 export const AddNewFood = () => {
-  const [data, setData] = useState(null);
-  const [imageFood, setImageFood] = useState(null);
   const [titleFood, setTitleFood] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -32,11 +32,19 @@ export const AddNewFood = () => {
   const [newIngredient, setNewIngredient] = useState("");
 
   const navigate = useNavigate();
-  const { user, addNewProduct } = userAuth();
-  console.log(user.id);
+  const [imageFood, setImageFood] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const { user, addNewProduct } = useAuth();
   function handleChangeImageFood(event) {
     const file = event.target.files[0];
-    setImageFood(file);
+    if (file) {
+      setImageFood(file);
+
+      // Criar URL para preview da imagem
+      const previewURL = URL.createObjectURL(file);
+
+      setPreviewImage(previewURL);
+    }
   }
 
   function handleAddIngredient() {
@@ -49,7 +57,7 @@ export const AddNewFood = () => {
   function handleRemoveIngredient(deleted) {
     setIngredientsName((prevState) => prevState.filter((ingredient) => ingredient !== deleted));
   }
-  function setIngredientsList(data) {
+  /*  function setIngredientsList(data) {
     const ingredientNames = data.map((ingredient) => ingredient.name);
     setIngredientsName(ingredientNames);
   }
@@ -58,7 +66,7 @@ export const AddNewFood = () => {
     const formattedPrice = price.replace(".", ",");
     console.log(formattedPrice); // Para verificar a saída formatada
     return formattedPrice;
-  }
+  } */
 
   function convertStringToNumber(inputString) {
     if (typeof inputString === "string") {
@@ -119,27 +127,40 @@ export const AddNewFood = () => {
         <Content>
           <h1>Adicionar prato</h1>
 
-          <FileImageFood>
+          <ImageContainer>
             <p className="label-title">Imagem do produto</p>
-            <label
-              htmlFor="file-upload"
-              className="custom-file-upload"
-            >
-              <img
-                src="/assets/icons/UploadSimple.svg"
-                alt=""
-                className="custom-label-image"
-                loading="lazy"
-              />
-              <input
-                type="file"
-                id="file-upload"
-                onChange={handleChangeImageFood}
-              />
-              Selecione imagem
-            </label>
-            <span id="file-name"></span>
-          </FileImageFood>
+
+            <Image>
+              {previewImage ? (
+                <img
+                  src={previewImage} // Exibe a imagem do preview ou a imagem existente
+                  alt="Foto do prato"
+                />
+              ) : (
+                <Salad size={100} />
+              )}
+            </Image>
+            <FileImageFood>
+              <label
+                htmlFor="file-upload"
+                className="custom-file-upload"
+              >
+                <img
+                  src="/assets/icons/UploadSimple.svg"
+                  alt=""
+                  className="custom-label-image"
+                  loading="lazy"
+                />
+                <input
+                  type="file"
+                  id="file-upload"
+                  onChange={handleChangeImageFood}
+                />
+                Selecione imagem
+              </label>
+              <span id="file-name"></span>
+            </FileImageFood>
+          </ImageContainer>
 
           <InputNameFood>
             <label htmlFor="name">Nome</label>

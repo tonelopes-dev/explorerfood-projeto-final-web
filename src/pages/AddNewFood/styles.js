@@ -51,6 +51,57 @@ export const Content = styled.form`
   }
 `;
 
+export const ImageContainer = styled.div`
+  .label-title {
+    margin-bottom: 32px;
+  }
+`;
+
+export const Image = styled.div`
+  position: relative;
+  margin: 0 3rem 3rem;
+
+  > img {
+    width: 18.6rem;
+    height: 18.6rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0.7rem;
+    right: 0.7rem;
+
+    width: 4.8rem;
+    height: 4.8rem;
+
+    background-color: ${({ theme }) => theme.COLORS.BLUE_500};
+    border-radius: 50%;
+    border: 3px solid ${({ theme }) => theme.COLORS.BLUE};
+
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: ${({ theme }) => theme.COLORS.BLUE};
+    }
+  }
+
+  > label:hover {
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  }
+`;
+
 export const FileImageFood = styled.div`
   display: flex;
   flex-direction: column;
@@ -61,17 +112,15 @@ export const FileImageFood = styled.div`
 
   color: ${({ theme }) => theme.COLORS.LIGHT_400};
 
-  .label-title {
-    margin-bottom: 16px;
-  }
   .custom-label-image {
     margin-right: 16px;
   }
+
   input {
     display: none;
   }
+
   .custom-file-upload {
-    cursor: pointer;
     display: flex;
     align-items: center;
     border-radius: 8px;
@@ -81,6 +130,7 @@ export const FileImageFood = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
     max-width: 230px;
     padding: 12px 32px;
+    cursor: pointer;
   }
 `;
 
