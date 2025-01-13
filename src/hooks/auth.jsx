@@ -1,96 +1,125 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 
-export const AuthContext = createContext({});
+const AuthContext = createContext({});
 
+// Constants for storage keys
+const STORAGE_KEY_USER = "@foodexplorerprojectbytonemonte:user";
+const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
+
+// eslint-disable-next-line react/prop-types
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
 
+  // Handle user sign-in
   async function signIn({ email, password }) {
     try {
       const response = await api.post("/sessions", { email, password }, { withCredentials: true });
       const { user } = response.data;
-      localStorage.setItem("@foodexplorerproject:user", JSON.stringify(user));
+
+      localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(user));
       setData({ user });
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("Não foi possível fazer o login.");
-      }
+      handleError(error, "Não foi possível fazer o login.");
     }
   }
 
-  async function signOut() {
-    localStorage.removeItem("@foodexplorerproject:user");
+  // Handle user sign-out
+  function signOut() {
+    localStorage.removeItem(STORAGE_KEY_USER);
     setData({});
   }
 
-  const addNewProduct = async ({ food, imageFoodFile }) => {
+  // Add a new product
+  async function addNewProduct({ food, imageFoodFile }) {
     try {
-      const responseId = await api.post(`/foods/`, food);
-      if (imageFoodFile && ["image/jpeg", "image/png"].includes(imageFoodFile.type) && imageFoodFile.size < MAX_SIZE) {
+      const responseId = await api.post("/foods/", food);
+
+      if (isValidImage(imageFoodFile)) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("photo-food", imageFoodFile);
+
         const response = await api.patch(`/foods/photo-food/${responseId.data.food_id}`, fileUploadForm);
         food.url_image = response.data.url_image;
       }
+
       alert("Produto adicionado com sucesso!");
       return responseId.data.food_id;
     } catch (error) {
-      alert("Não foi possível atualizar o produto.");
+      handleError(error, "Não foi possível adicionar o produto.");
     }
-  };
+  }
 
+  // Update an existing product
   async function updateProduct({ food, imageFoodFile }) {
     try {
-      if (imageFoodFile) {
+      if (imageFoodFile && isValidImage(imageFoodFile)) {
         const fileUploadForm = new FormData();
         fileUploadForm.append("photo-food", imageFoodFile);
-        console.log("fileUploadForm");
-        const response = await api.patch(`/foods/photo-food/${food.id}`, fileUploadForm);
 
+        const response = await api.patch(`/foods/photo-food/${food.id}`, fileUploadForm);
         food.url_image = response.data.url_image;
       }
 
       await api.put(`/foods/${food.id}`, food);
-
       alert("Produto atualizado com sucesso!");
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("Não foi possível atualizar o produto.");
-      }
+      handleError(error, "Não foi possível atualizar o produto.");
     }
   }
 
+  // Validate user session
   useEffect(() => {
     async function checkSession() {
       try {
         const response = await api.get("/users/validated", { withCredentials: true });
         const { user } = response.data;
         setData({ user });
-      } catch (error) {
-        console.log("Sessão não válida ou expirada");
-        localStorage.removeItem("@foodexplorerproject:user");
+      } catch {
+        console.warn("Sessão não válida ou expirada");
+        localStorage.removeItem(STORAGE_KEY_USER);
         setData({});
       }
     }
 
-    const user = localStorage.getItem("@foodexplorerproject:user");
-    if (user) {
-      setData({ user: JSON.parse(user) });
+    const storedUser = localStorage.getItem(STORAGE_KEY_USER);
+    if (storedUser) {
+      setData({ user: JSON.parse(storedUser) });
       checkSession();
     }
-  }, []); // Removed unnecessary dependency
+  }, []);
 
-  return <AuthContext.Provider value={{ signIn, user: data.user, signOut, addNewProduct, updateProduct }}>{children}</AuthContext.Provider>;
+  // Helper: Check if an image file is valid
+  function isValidImage(file) {
+    return file && ["image/jpeg", "image/png"].includes(file.type) && file.size <= MAX_IMAGE_SIZE;
+  }
+
+  // Helper: Handle errors
+  function handleError(error, defaultMessage) {
+    if (error.response) {
+      alert(error.response.data.message);
+    } else {
+      alert(defaultMessage);
+    }
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user: data.user,
+        signIn,
+        signOut,
+        addNewProduct,
+        updateProduct,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-function userAuth() {
-  const content = useContext(AuthContext);
-  return content;
+function useAuth() {
+  return useContext(AuthContext);
 }
 
-export { AuthProvider, userAuth };
+export { AuthProvider, useAuth };
