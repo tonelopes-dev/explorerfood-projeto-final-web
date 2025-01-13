@@ -1,16 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, ButtonBack, Container, Content, DetailsFood, FoodContainer, IngredientsFood, PhotoFood } from "./styles";
+import { Button, ButtonBack, Container, Content, DetailsFood, FoodContainer, IngredientsFood, PhotoFood, ContainerLoading } from "./styles";
 import { Header } from "../../components/Header";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { QuantityController } from "../../components/QuantityControllerAddtoCart";
 import { Footer } from "../../components/Footer";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 import { USER_ROLE } from "../../utils/roles";
 import { ButtonRed } from "../../components/Button";
 
 export const FoodDetails = () => {
-  const { user } = userAuth();
+  const { user } = useAuth();
   const [data, setData] = useState(null);
   const [foodImageUrl, setFoodImageUrl] = useState("");
   const params = useParams();
@@ -49,7 +49,12 @@ export const FoodDetails = () => {
   }, [params.id]);
 
   if (!data) {
-    return <div>Carregando...</div>; // Ou qualquer outra representação de loading
+    return (
+      <ContainerLoading>
+        <h1>Carregando...</h1>
+        <span className="loader"></span>
+      </ContainerLoading>
+    ); // Ou qualquer outra representação de loading
   }
   const price = Number(data.price);
 

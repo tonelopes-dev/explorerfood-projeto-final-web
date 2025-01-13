@@ -19,6 +19,43 @@ export const Container = styled.div`
     padding-bottom: 33px;
   }
 `;
+export const ContainerLoading = styled.div`
+  display: flex;
+  max-width: 1112px;
+  gap: 48px;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  margin: auto;
+
+  background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  h1 {
+    font-family: var(--poppins);
+    font-weight: 400;
+    font-size: 3.2rem;
+  }
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
 export const Content = styled.div`
   display: flex;
   justify-content: center;
