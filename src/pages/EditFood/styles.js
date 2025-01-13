@@ -15,6 +15,129 @@ export const Container = styled.div`
   }
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  max-width: 1112px;
+  gap: 48px;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  margin: auto;
+
+  background-color: ${({ theme }) => theme.COLORS.DARK_400};
+  h1 {
+    font-family: var(--poppins);
+    font-weight: 400;
+    font-size: 3.2rem;
+  }
+  .loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
+
+export const ImageContainer = styled.div`
+  .label-title {
+    margin-bottom: 32px;
+  }
+`;
+
+export const Image = styled.div`
+  position: relative;
+  margin: 0 3rem 3rem;
+
+  > img {
+    width: 18.6rem;
+    height: 18.6rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0.7rem;
+    right: 0.7rem;
+
+    width: 4.8rem;
+    height: 4.8rem;
+
+    background-color: ${({ theme }) => theme.COLORS.BLUE_500};
+    border-radius: 50%;
+    border: 3px solid ${({ theme }) => theme.COLORS.BLUE};
+
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: ${({ theme }) => theme.COLORS.BLUE};
+    }
+  }
+
+  > label:hover {
+    background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  }
+`;
+export const FileImageFood = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  justify-content: start;
+  align-items: flex-start;
+  height: 80px;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+  .label-title {
+    margin-bottom: 16px;
+  }
+
+  .custom-label-image {
+    margin-right: 16px;
+  }
+
+  input {
+    display: none;
+  }
+
+  .custom-file-upload {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-family: var(--poppins);
+    font-size: 1.4rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    max-width: 230px;
+    padding: 12px 32px;
+  }
+`;
+
 export const ButtonBack = styled.button`
   display: flex;
   font-family: var(--poppins);
@@ -50,39 +173,6 @@ export const Content = styled.form`
     font-size: 3.2rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     width: 100%;
-  }
-`;
-
-export const FileImageFood = styled.div`
-  display: flex;
-
-  flex-direction: column;
-  width: 230px;
-  justify-content: start;
-  align-items: flex-start;
-  height: 80px;
-
-  color: ${({ theme }) => theme.COLORS.LIGHT_400};
-
-  .label-title {
-    margin-bottom: 16px;
-  }
-  .custom-label-image {
-    margin-right: 16px;
-  }
-  input {
-    display: none;
-  }
-  .custom-file-upload {
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
-    white-space: nowrap;
-    font-family: var(--poppins);
-    font-size: 1.4rem;
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    max-width: 230px;
-    padding: 12px 32px;
   }
 `;
 

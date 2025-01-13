@@ -5,12 +5,14 @@ import {
   Buttons,
   Container,
   Content,
-  FileImageFood,
   InputCategory,
   InputDescription,
   InputIngredients,
   InputNameFood,
   InputPrice,
+  Image,
+  ImageContainer,
+  ContainerLoading,
 } from "./styles";
 
 import { Footer } from "../../components/Footer";
@@ -19,11 +21,11 @@ import { ButtonRed } from "../../components/Button";
 import { IngredientItem } from "../../components/IngredientItem";
 
 import { api } from "../../services/api";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
+import { Camera } from "lucide-react";
 
 export const EditFood = () => {
   const [data, setData] = useState(null);
-  const [imageFood, setImageFood] = useState(null);
   const [titleFood, setTitleFood] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -33,12 +35,21 @@ export const EditFood = () => {
   const [newIngredient, setNewIngredient] = useState("");
   const params = useParams();
   const navigate = useNavigate();
-  const { user, updateProduct } = userAuth();
+  const { user, updateProduct } = useAuth();
+
+  const imageURL = data && `${api.defaults.baseURL}/files/${data.url_image}`;
+  const [imageFood, setImageFood] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
   function handleChangeImageFood(event) {
     const file = event.target.files[0];
+    if (file) {
+      setImageFood(file);
 
-    setImageFood(file);
+      // Criar URL para preview da imagem
+      const previewURL = URL.createObjectURL(file);
+      setPreviewImage(previewURL);
+    }
   }
 
   function handleAddIngredient() {
@@ -108,6 +119,7 @@ export const EditFood = () => {
     async function fetchFood() {
       const response = await api.get(`/foods/${params.id}`);
       setData(response.data);
+      setImageFood(response.data.image);
       setTitleFood(response.data.title);
       setIngredientsList(response.data.ingredients);
       setPrice(formatPrice(response.data.price));
@@ -119,149 +131,155 @@ export const EditFood = () => {
   }, [params.id]);
 
   if (!data) {
-    return <div>Carregando...</div>; // Ou qualquer outra representação de loading
+    return (
+      <ContainerLoading className="loading">
+        <h1>Carregando...</h1>
+        <span className="loader"></span>
+      </ContainerLoading>
+    ); // Ou qualquer outra representação de loading
   }
-
   return (
-    <Container>
+    <>
       <Header user={user} />
-      <Content>
-        <ButtonBack onClick={() => handleBack()}>
-          <img
-            src="/assets/icons/CaretLeft.svg"
-            alt=""
-            loading="lazy"
-          />{" "}
-          voltar
-        </ButtonBack>
-
-        <h1>Editar prato</h1>
-
-        <FileImageFood>
-          <p className="label-title">Imagem do produto</p>
-          <label
-            htmlFor="file-upload"
-            className="custom-file-upload"
-          >
+      <Container>
+        <Content>
+          <ButtonBack onClick={() => handleBack()}>
             <img
-              src="/assets/icons/UploadSimple.svg"
+              src="/assets/icons/CaretLeft.svg"
               alt=""
-              className="custom-label-image"
               loading="lazy"
-            />
-            <input
-              type="file"
-              id="file-upload"
-              onChange={handleChangeImageFood}
-            />
-            Selecione imagem
-          </label>
-          <span id="file-name"></span>
-        </FileImageFood>
+            />{" "}
+            voltar
+          </ButtonBack>
 
-        <InputNameFood>
-          <label htmlFor="name">Nome</label>
-          <input
-            id="name"
-            type="text"
-            value={titleFood}
-            onChange={(e) => setTitleFood(e.target.value)}
-            placeholder="Nome do prato"
-          />
-        </InputNameFood>
+          <h1>Editar prato</h1>
 
-        <InputCategory>
-          <label
-            className="select"
-            htmlFor="category"
-          >
-            Categoria
-          </label>
+          <ImageContainer>
+            <p className="label-title">Imagem do Prato</p>
 
-          <select
-            name="categories"
-            id="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-            <option
-              value="default"
-              desabled="true"
-            >
-              --Categorias--
-            </option>
-            <option value="meal">Refeição</option>
-            <option value="dessert">Sobremesas</option>
-            <option value="drink">Bebidas</option>
-          </select>
-        </InputCategory>
-
-        <InputIngredients>
-          <label htmlFor="ingredients">Ingredientes</label>
-          <div className="container-ingredients ">
-            {ingredientsName.map((ingredient, index) => (
-              <IngredientItem
-                key={String(index)}
-                value={ingredient}
-                onClick={() => {
-                  handleRemoveIngredient(ingredient);
-                }}
+            <Image>
+              <img
+                src={previewImage || imageURL} // Exibe a imagem do preview ou a imagem existente
+                alt="Foto do prato"
               />
-            ))}
+              <label htmlFor="image">
+                <input
+                  id="image"
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleChangeImageFood} // Atualiza o preview ao selecionar nova imagem
+                />
+                <Camera size={24} />
+              </label>
+            </Image>
+          </ImageContainer>
 
-            <IngredientItem
-              className="input-ingredient"
-              placeholder="Adicionar"
-              isNew
-              id="ingredients"
-              value={newIngredient}
-              onChange={(e) => setNewIngredient(e.target.value)}
-              onClick={handleAddIngredient}
-            />
-          </div>
-        </InputIngredients>
-        <InputPrice>
-          <label htmlFor="price">Preço</label>
-          <div>
-            <p>R$ </p>
+          <InputNameFood>
+            <label htmlFor="name">Nome</label>
             <input
+              id="name"
               type="text"
-              id="price"
-              value={price}
-              placeholder="79,00"
-              onChange={(e) => setPrice(e.target.value.trim())}
+              value={titleFood}
+              onChange={(e) => setTitleFood(e.target.value)}
+              placeholder="Nome do prato"
             />
-          </div>
-        </InputPrice>
+          </InputNameFood>
 
-        <InputDescription>
-          <label htmlFor="description">Descrição</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            name=""
-            id="description"
-            cols="100"
-            rows="100"
-          ></textarea>
-        </InputDescription>
-        <Buttons>
-          <div className="content">
-            {" "}
-            <ButtonRed
-              className="button-delete"
-              title="Excluir prato"
-              onClick={handleDeleteProduct}
-            />
-            <ButtonRed
-              className="button-updated"
-              title="Salvar alterações"
-              onClick={handleUpdateProduct}
-            />
-          </div>
-        </Buttons>
-      </Content>
-      <Footer />
-    </Container>
+          <InputCategory>
+            <label
+              className="select"
+              htmlFor="category"
+            >
+              Categoria
+            </label>
+
+            <select
+              name="categories"
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option
+                value="default"
+                // eslint-disable-next-line react/no-unknown-property
+                desabled="true"
+              >
+                --Categorias--
+              </option>
+              <option value="meal">Refeição</option>
+              <option value="dessert">Sobremesas</option>
+              <option value="drink">Bebidas</option>
+            </select>
+          </InputCategory>
+
+          <InputIngredients>
+            <label htmlFor="ingredients">Ingredientes</label>
+            <div className="container-ingredients ">
+              {ingredientsName.map((ingredient, index) => (
+                <IngredientItem
+                  key={String(index)}
+                  value={ingredient}
+                  onClick={() => {
+                    handleRemoveIngredient(ingredient);
+                  }}
+                />
+              ))}
+
+              <IngredientItem
+                className="input-ingredient"
+                placeholder="Adicionar"
+                isNew
+                id="ingredients"
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                onClick={handleAddIngredient}
+              />
+            </div>
+          </InputIngredients>
+          <InputPrice>
+            <label htmlFor="price">Preço</label>
+            <div>
+              <p>R$ </p>
+              <input
+                type="text"
+                id="price"
+                value={price}
+                placeholder="79,00"
+                onChange={(e) => setPrice(e.target.value.trim())}
+              />
+            </div>
+          </InputPrice>
+
+          <InputDescription>
+            <label htmlFor="description">Descrição</label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              name=""
+              id="description"
+              cols="100"
+              rows="100"
+            ></textarea>
+          </InputDescription>
+          <Buttons>
+            <div className="content">
+              {" "}
+              <ButtonRed
+                className="button-delete"
+                title="Excluir prato"
+                onClick={handleDeleteProduct}
+              />
+              <ButtonRed
+                className="button-updated"
+                title="Salvar alterações"
+                onClick={handleUpdateProduct}
+              />
+            </div>
+          </Buttons>
+        </Content>
+        <Footer />
+      </Container>
+    </>
   );
 };
