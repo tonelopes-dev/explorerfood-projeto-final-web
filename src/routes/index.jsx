@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
-import { userAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/auth";
 import { USER_ROLE } from "../utils/roles";
 import { AdminRoutes } from "./admin.routes";
 import { CustomerRoutes } from "./customer.routes";
 import { AuthRoutes } from "./auth.routes";
 
 export function Routes() {
-  const { user, signOut } = userAuth();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     if (user === null) {

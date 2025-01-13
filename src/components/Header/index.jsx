@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   BrandSection,
   ButtonReceipt,
@@ -19,12 +19,13 @@ import { ButtonRed } from "../Button";
 import { SignOut } from "../SignOut";
 import { USER_ROLE } from "../../utils/roles";
 import { useNavigate } from "react-router-dom";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 
 const logoCustumer = "/assets/icons/logo.png";
 
+// eslint-disable-next-line react/prop-types
 export function Header({ user, children, ...rest }) {
-  const { signOut } = userAuth();
+  const { signOut } = useAuth();
 
   const [menuMobile, setMenuMobile] = useState(false);
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export function Header({ user, children, ...rest }) {
     signOut();
     navigate("/");
   }
+
   return (
     <Container>
       {[USER_ROLE.ADMIN].includes(user.role) && (
