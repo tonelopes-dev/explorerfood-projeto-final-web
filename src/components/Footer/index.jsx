@@ -1,7 +1,7 @@
-import React from "react";
 import { Container, Content } from "./styles";
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <Container>
       <Content>
@@ -10,7 +10,7 @@ export const Footer = () => {
           alt=""
           loading="lazy"
         />
-        <span>© 2023 - Todos os direitos reservados.</span>
+        <span>© {year} - Todos os direitos reservados.</span>
       </Content>
     </Container>
   );
