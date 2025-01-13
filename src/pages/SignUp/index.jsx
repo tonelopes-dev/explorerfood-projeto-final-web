@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Brand } from "../../components/Brand";
 import { Container, Content, Form } from "./styles";
 import { Input } from "../../components/Input";
@@ -15,6 +15,7 @@ export function SignUp() {
   const navigate = useNavigate();
 
   function handleSingUp() {
+
     if (!name || !email || !password) {
       return alert("Por favor preencha todos os campos!");
     }
@@ -33,6 +34,7 @@ export function SignUp() {
           alert("Não foi possivel cadastrar!");
         }
       });
+
   }
   return (
     <Container>

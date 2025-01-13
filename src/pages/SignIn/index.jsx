@@ -1,33 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Brand } from "../../components/Brand";
 import { Container, Content, Form } from "./styles";
 import { Input } from "../../components/Input";
 import { ButtonRed } from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 
 const logoCustumer = "/assets/icons/logo.png";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const { signIn } = userAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
 
   // Função para realizar o login
-  function handleSignIn() {
+  async function handleSignIn() {
     if (!email || !password) {
       return alert("Por favor preencha todos os campos!");
     }
-    signIn({ email, password })
-      .then(() => {
-        navigate("/");
-      })
-      .catch(() => {
-        // Lida com erros de autenticação
-        alert("Falha no login, verifique suas credenciais!");
-      });
+
+    setLoading(true); // Ativa o estado de loading ao iniciar a requisição
+
+    try {
+      await signIn({ email, password });
+      navigate("/"); // Redireciona após sucesso
+    } catch (error) {
+      alert("Falha no login, verifique suas credenciais!"); // Exibe alerta em caso de erro
+    } finally {
+      setLoading(false); // Desativa o estado de loading após a requisição
+    }
   }
 
   return (
@@ -53,8 +57,10 @@ export function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <ButtonRed
-            title="Entrar"
+            title={loading ? "Carregando..." : "Entrar"}
+            loading={loading}
             onClick={handleSignIn}
+            disabled={loading} // Desabilita o botão enquanto está carregando
           />
           <Link to="/register">Criar conta</Link>
         </Form>

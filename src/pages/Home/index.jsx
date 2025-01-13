@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./styles.css";
@@ -12,12 +12,23 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 import { Header } from "../../components/Header";
-import { Banner, Container, Content, ContentGradient, ImageBanner, Section, SectionContent, TitleBanner, TitleSection } from "./styles";
+import {
+  Banner,
+  Container,
+  Content,
+  ContentGradient,
+  ImageBanner,
+  Section,
+  SectionContent,
+  TitleBanner,
+  TitleSection,
+  ContainerLoading,
+} from "./styles";
 
 import { CardFood } from "../../components/CardFood";
 import { api } from "../../services/api";
 import { Footer } from "../../components/Footer";
-import { userAuth } from "../../hooks/auth";
+import { useAuth } from "../../hooks/auth";
 
 export const Home = () => {
   const [meals, setMeals] = useState([]);
@@ -26,7 +37,7 @@ export const Home = () => {
   /*  const [searchTerm, setSearchTerm] = useState([]);
   const [resultSerchTerm, setResultSerchTerm] = useState([]); */
 
-  const { user } = userAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchFoods = async () => {
@@ -63,10 +74,7 @@ export const Home = () => {
 
   return (
     <>
-      <Header
-        user={user}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <Header user={user} />
 
       <Container>
         <Banner>
@@ -84,6 +92,11 @@ export const Home = () => {
           </TitleBanner>
         </Banner>
         <Content>
+          {!meals.length && !desserts.length && !drinks.length && (
+            <ContainerLoading>
+              <h1>Carregando...</h1> <span className="loader"></span>
+            </ContainerLoading>
+          )}
           {meals.length > 0 && (
             <Section>
               <TitleSection>Refeições</TitleSection>
