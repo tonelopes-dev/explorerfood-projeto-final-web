@@ -66,6 +66,12 @@ export const PhotoFood = styled.div`
     align-self: flex-end;
     width: 24px;
     height: 24px;
+    cursor: pointer;
+  }
+  .icon-pencil:hover {
+    filter: brightness(0.9);
+    scale: 1.1;
+    background-color: ${({ theme }) => theme.COLORS.BLUE_500};
   }
 
   .icon-like {

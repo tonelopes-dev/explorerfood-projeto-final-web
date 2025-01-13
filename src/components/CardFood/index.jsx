@@ -1,10 +1,8 @@
-import React from "react";
 import { Container, Content, Description, PhotoFood } from "./styles";
 import formatCentsValue from "../../utils/formatCentsValue";
 import { useNavigate } from "react-router-dom";
 import { QuantityController } from "../QuantityControllerAddtoCart"; // Certifique-se de exportar corretamente o QuantityController
 import { USER_ROLE } from "../../utils/roles";
-import { api } from "../../services/api";
 
 export const CardFood = ({ role, title, price, description, imageUrl, id, ...rest }) => {
   const navigate = useNavigate();
